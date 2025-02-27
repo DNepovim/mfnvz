@@ -1,13 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from "astro:assets"
-import cover from "../assets/cover.jpg"
 
 import "../styles/global.css";
 ---
 
 <Layout>
-<Image src={cover} alt="" class="rounded-md"/>
-<header class="ml-4 -mt-[7rem]"><h1 class="text-[5rem] leading-[1.2em] font-head"><span class="text-white text-[6rem]">Malý festival</span><br />na velké zahradě</h1>
-  <p class="text-xl">13.&thinsp;6.&thinsp;2025</p></header>
+  <header class="aspect-[4800/2842]">
+    <h1 class=" w-full font-head text-white h-full">
+      <span class="text-[6rem] leading-[1.2em] bg-[url('/src/assets/cover.jpg')] flex items-end h-[calc(100%-5rem)] text-right w-full pb-4 bg-cover bg-top pl-4 rounded-md">Malý festival</span>
+      <span class="clip-text font-head leading-[1.2em] bg-[url('/src/assets/cover.jpg')] h-[5rem] pl-4 text-[3rem]  bg-bottom bg-cover block">na velké zahradě</span>
+    </h1>
+  </header>
+  <p class="text-3xl font-thin  gap-4 flex items-center mb-4"><span>13.&thinsp;6.&thinsp;2025</span><span class="flex-1  bg-green-950 h-[0.5px]" /><span>Řevnice</span></p>
 </Layout>

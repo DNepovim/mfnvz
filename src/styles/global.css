@@ -2,5 +2,15 @@
 
 @theme {
   --font-head: "liebedoni-outline", "serif";
-  --font-text: "Buffo", "serif";
+  --font-head-solid: "liebedoni-solid", "serif";
+  --font-text: "open-sans", "serif";
+}
+
+.clip-text {
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html {
+  font-family: var(--font-text), sans-serif;
 }
