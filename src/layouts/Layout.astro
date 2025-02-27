@@ -1,3 +1,6 @@
+---
+import Analytics from '@vercel/analytics/astro'
+---
 <!doctype html>
 <html lang="en">
 	<head>
@@ -9,6 +12,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/tai1czq.css">
 	</head>
 	<body>
+    <Analytics />
     <main class="max-w-4xl mx-auto py-8 px-4">
       <slot />
     </main>
