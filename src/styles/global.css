@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --font-head: "liebedoni-outline", "serif";
+  --font-text: "Buffo", "serif";
+}

@@ -1,11 +1,13 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import { Image } from "astro:assets"
+import cover from "../assets/cover.jpg"
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import "../styles/global.css";
 ---
 
 <Layout>
-	<Welcome />
+<Image src={cover} alt="" class="rounded-md"/>
+<header class="ml-4 -mt-[7rem]"><h1 class="text-[5rem] leading-[1.2em] font-head"><span class="text-white text-[6rem]">Malý festival</span><br />na velké zahradě</h1>
+  <p class="text-xl">13.&thinsp;6.&thinsp;2025</p></header>
 </Layout>
