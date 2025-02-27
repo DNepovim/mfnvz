@@ -3,7 +3,8 @@
 @theme {
   --font-head: "liebedoni-outline", "serif";
   --font-head-solid: "liebedoni-solid", "serif";
-  --font-text: "open-sans", "serif";
+  --font-text: "rokkitt", "serif";
+  --color-brand: #5e4f3c
 }
 
 .clip-text {
