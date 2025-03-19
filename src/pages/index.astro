@@ -4,14 +4,62 @@ import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
 ---
 
+<script>
+  // Handle vertical scroll to horizontal scroll conversion
+  let screen = 1
+
+  document.addEventListener('wheel', (e) => {
+    console.log(e)
+    if (e.deltaY || e.deltaX) {
+      const y = e.deltaY ?? 0
+      const x = e.deltaX ?? 0
+
+      const biggerValue = Math.abs(y) > Math.abs(x) ? y : x
+      const direction = biggerValue > 0 ? 1 : -1;
+
+      screen += direction
+
+      console.log(screen)
+
+      window.scrollTo({
+        left: window.innerWidth * screen,
+        behavior: 'smooth'
+      });
+      e.preventDefault();
+    }
+  }, { passive: false });
+</script>
+
 <Layout>
-  <header class="aspect-[4800/2842]">
-    <h1 class=" w-full font-head text-white h-full">
-      <span class="text-[6rem] leading-[1.2em] bg-[url('/src/assets/cover.jpg')] flex items-end h-[calc(100%-5rem)] text-right w-full pb-4 bg-cover bg-top pl-4 rounded-md">Malý festival</span>
-      <span class="clip-text font-head leading-[1.2em] bg-[url('/src/assets/cover.jpg')] h-[5rem] pl-4 text-[3rem]  bg-bottom bg-cover block">na velké zahradě</span>
-    </h1>
-  </header>
-  <p class="text-4xl text-gray-500 font-light px-4 gap-4 flex items-center mb-4"><span>13.&thinsp;6.&thinsp;2025</span><span class="flex-1  bg-green-950 h-[0.5px]" /><span>Řevnice</span></p>
-  <p class="text-2xl text-gray-400 font-light px-4 gap-4 flex items-center justify-between"><span>Audio Atache</span><span>Kongruence</span><span>Melamed Klezmer Band</span><span>Ondrův projekt</span><span>Hansen</span></p>
-  <p class="font-thin"></p>
+  <div class="flex w-[400vw]">
+    <div class="h-screen w-screen">
+      <main class="max-w-6xl mx-auto py-8 px-4">
+        <header class="aspect-[4800/2842]">
+          <h1 class=" w-full font-head text-white h-full">
+            <span class="text-[6rem] leading-[1.2em] bg-[url('/src/assets/cover.jpg')] flex items-end h-[calc(100%-5rem)] text-right w-full pb-4 bg-cover bg-top pl-4 rounded-md">Malý festival</span>
+            <span class="clip-text font-head leading-[1.2em] bg-[url('/src/assets/cover.jpg')] h-[5rem] pl-4 text-[3rem]  bg-bottom bg-cover block">na velké zahradě</span>
+          </h1>
+        </header>
+        <p class="text-4xl text-gray-500 font-light px-4 gap-4 flex items-center mb-4"><span>13.&thinsp;6.&thinsp;2025</span><span class="flex-1  bg-green-950 h-[0.5px]" /><span>Řevnice</span></p>
+        <p class="text-2xl text-gray-400 font-light px-4 gap-4 flex items-center justify-between"><span>Audio Atache</span><span>Kongruence</span><span>Melamed Klezmer Band</span><span>Ondrův projekt</span><span>Hansen</span></p>
+        <p class="font-thin"></p>
+      </main>
+    </div>
+    <div class="h-screen w-screen">
+      <div class="max-w-6xl mx-auto py-8 px-4">
+        <h2 class="font-head text-6xl">O festivalu</h2>
+      </div>
+    </div>
+    <div class="h-screen w-screen">
+      <div class="max-w-6xl mx-auto py-8 px-4">
+        <h2 class="font-head text-6xl">Program</h2>
+      </div>
+    </div>
+    <div class="h-screen w-screen">
+      <div class="max-w-6xl mx-auto py-8 px-4">
+        <h2 class="font-head text-6xl">Mapa</h2>
+      </div>
+    </div>
+  </div>
+
 </Layout>
