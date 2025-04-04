@@ -1,15 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import coverLarge from '../assets/cover.jpg';
 
 import "../styles/global.css";
 ---
 
 <Layout>
-  <header class="aspect-[4800/2842]">
-    <h1 class=" w-full font-head text-white h-full">
-      <span class="text-[6rem] leading-[1.2em] bg-[url('/src/assets/cover.jpg')] flex items-end h-[calc(100%-5rem)] text-right w-full pb-4 bg-cover bg-top pl-4 rounded-md">Malý festival</span>
-      <span class="clip-text font-head leading-[1.2em] bg-[url('/src/assets/cover.jpg')] h-[5rem] pl-4 text-[3rem]  bg-bottom bg-cover block">na velké zahradě</span>
-    </h1>
-  </header>
-  <p class="text-3xl font-thin  gap-4 flex items-center mb-4"><span>13.&thinsp;6.&thinsp;2025</span><span class="flex-1  bg-green-950 h-[0.5px]" /><span>Řevnice</span></p>
+  <main class="flex flex-col justify-between min-h-screen max-w-6xl mx-auto py-8 px-4">
+
+    <div><Image
+      src={coverLarge}
+      alt="Festival cover image"
+      class="w-full h-full rounded-lg"
+      widths={[400, 800, 1200]}
+      sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
+    />
+    <h1 class="font-head -mt-[13vw] sm:-mt-[8rem] z-20 pl-4">
+      <span class="text-white text-[9vw] sm:text-[5rem]">Malý festival</span>
+      <span class="font-head text-[5vw] sm:text-[3rem] mb-4 block relative overflow-hidden">
+          na velké zahradě
+      </span>
+    </h1></div>
+    <p class="text-lg sm:text-3xl font-thin px-4 gap-4 flex items-center mb-4"><span>13.&thinsp;6.&thinsp;2025</span><span class="flex-1 bg-green-950 h-[0.5px]" /><span>Řevnice</span></p>
+  </main>
 </Layout>
