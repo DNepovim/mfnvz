@@ -1,27 +1,109 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import coverLarge from '../assets/cover.jpg';
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import coverLarge from "../assets/cover.jpg";
+import H2 from "../components/H2.astro";
+import P from "../components/P.astro";
+import A from "../components/A.astro";
+import FacebookIcon from "../components/FacebookIcon.astro";
+import TreeIcon from "../components/TreeIcon.astro";
 
 import "../styles/global.css";
 ---
 
 <Layout>
-  <main class="flex flex-col justify-between min-h-screen max-w-6xl mx-auto py-8 px-4">
-
-    <div><Image
-      src={coverLarge}
-      alt="Festival cover image"
-      class="w-full h-full rounded-lg"
-      widths={[400, 800, 1200]}
-      sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
-    />
-    <h1 class="font-head -mt-[13vw] sm:-mt-[8rem] z-20 pl-4">
-      <span class="text-white text-[9vw] sm:text-[5rem]">Malý festival</span>
-      <span class="font-head text-[5vw] sm:text-[3rem] mb-4 block relative overflow-hidden">
+  <main class="max-w-6xl mx-auto py-8 px-4">
+    <div>
+      <Image
+        src={coverLarge}
+        alt="Festival cover image"
+        class="w-full h-full rounded-lg"
+        widths={[400, 800, 1200]}
+        sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
+      />
+      <h1 class="font-head -mt-[13vw] sm:-mt-[8rem] z-20 pl-4">
+        <span class="text-white text-[9vw] sm:text-[5rem]">Malý festival</span>
+        <span
+          class="font-head text-[5vw] sm:text-[3rem] mb-4 block relative overflow-hidden"
+        >
           na velké zahradě
-      </span>
-    </h1></div>
-    <p class="text-lg sm:text-3xl font-thin px-4 gap-4 flex items-center mb-4"><span>13.&thinsp;6.&thinsp;2025</span><span class="flex-1 bg-green-950 h-[0.5px]" /><span>Řevnice</span></p>
+        </span>
+      </h1>
+    </div>
+    <p class="text-lg sm:text-3xl font-thin px-4 gap-4 flex items-center mb-4">
+      <span>13.&thinsp;6.&thinsp;2025</span><span
+        class="flex-1 bg-green-950 h-[0.5px]"></span><span>Řevnice</span>
+    </p>
+    <div class="max-w-[42rem] mx-auto mt-12">
+      <P>
+        <i>
+          Třetí ročník našeho skvělého festivalu. I letos zazní kapela, která
+          dřív jinde nezazněla. I letos zazní žánr, který u nás dřív nezazněl. I
+          letos zazní kapela Kongruence. Co to znamná? Kdo u nás tedy letos
+          vystoupí? To vám dáme již brzy vědět. Zatím si umyjte půlitry.
+        </i>
+      </P>
+      <P>
+        <A href="https://fb.me/e/3aKjFh135">
+          <span class="flex items-center gap-2">
+            <FacebookIcon class="w-5 h-5" />
+            Událost na Facebooku
+          </span>
+        </A>
+      </P>
+    </div>
+    <div class="max-w-xl mx-auto">
+      <H2>
+        <span class="flex items-center gap-1.5"> Za kolik to bude? </span>
+      </H2>
+      <P>
+        Vstupné, stravné a ubytné... dobrovolné. Máte moc? Dejte moc. Máte málo?
+        Dejte málo. Nemáte nic? Nedávejte nic. Tak jednoduché to je.
+      </P>
+      <H2>
+        <span class="flex items-center gap-1.5"> Co s sebou? </span>
+      </H2>
+      <P>
+        Chceš-li pít, vem si sklenici či hrnek. Chceš-li jíst, vem si misku a
+        příbor. Žádné jednorázové ptákoviny na místě nebudou. Proč bychom také
+        kupovali něco, co máte všichni doma, že? A pokud rád vaříš, pečeš, či
+        jinak připravuješ pokrmy, neboj se přinést něco na ochutnání na náš
+        řevnicko-švédský stůl.
+      </P>
+      <H2>
+        <span class="flex items-center gap-1.5"> Mohu u vás přespat? </span>
+      </H2>
+      <P>
+        Ano! A budeme rádi. Spacák si můžete rozložit kdekoli na zahradě a i v
+        domě se místo najde. Stan bude také kde postavit. V sobotu můžete
+        vyrazit na výlet. Třeba na <A href="https://mapy.cz/s/hufosecago"
+          >Babku</A
+        >. Úschova zavazadel v domě po celý den je v ceně.
+      </P>
+      <H2>
+        <span class="flex items-center gap-1.5"> A co děti? </span>
+      </H2>
+      <P>
+        Máme na zahradě pískoviště, dětský hrad s klouzačkou a pro ty starší
+        skvělý ořech. A třeba se vám podaří domluvit s někým, kdo vám je chvíli
+        pohlídá.
+      </P>
+      <H2>
+        <span class="flex items-center gap-1.5">
+          Fakt je to už třetí ročník?
+        </span>
+      </H2>
+      <P>
+        Ano. Koukni! <br />
+        1. ročník – <A
+          href="https://eu.zonerama.com/JakubProchazka/Album/9939770?fbclid=IwY2xjawJiLqlleHRuA2FlbQIxMQABHqUxfw_qHjd8e0Bg9j1dP7Hm5Muw-e4NfWAUyhgQmcTfUFoIQ5jjk_Pqi6R3_aem_KxBdPJsAlGn0mEZ7CYQKYg"
+          >fotky</A
+        >, <A href="https://fb.me/e/Z6MWWpRb">událost</A>. <br />
+        2. ročník – <A
+          href="https://eu.zonerama.com/JakubProchazka/Album/11625210?fbclid=IwY2xjawJiLs5leHRuA2FlbQIxMQABHpYEv1B6ivwBspGdp3uqHzVrNUKmiOJlnL58nurcHc30wK08nfWVRvhvfzYY_aem_JBtPEOJ76zi_YOJIjVjHow"
+          >fotky</A
+        >, <A href="https://fb.me/e/7xDjv46p7">událost</A>.
+      </P>
+    </div>
   </main>
 </Layout>

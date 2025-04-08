@@ -6,11 +6,6 @@
   --font-text: "open-sans", "serif";
 }
 
-.clip-text {
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 html {
   font-family: var(--font-text), sans-serif;
 }
