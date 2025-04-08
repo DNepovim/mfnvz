@@ -11,8 +11,8 @@ import "../styles/global.css";
 ---
 
 <Layout>
-  <main class="max-w-6xl mx-auto py-8 px-4">
-    <div>
+  <main class="max-w-6xl mx-auto py-2 sm:py-4">
+    <div class="px-4 sm:px-8">
       <Image
         src={coverLarge}
         alt="Festival cover image"
@@ -28,12 +28,14 @@ import "../styles/global.css";
           na velké zahradě
         </span>
       </h1>
+      <p
+        class="text-lg sm:text-3xl font-thin px-4 gap-4 flex items-center mb-4"
+      >
+        <span>13.&thinsp;6.&thinsp;2025</span><span
+          class="flex-1 bg-green-950 h-[0.5px]"></span><span>Řevnice</span>
+      </p>
     </div>
-    <p class="text-lg sm:text-3xl font-thin px-4 gap-4 flex items-center mb-4">
-      <span>13.&thinsp;6.&thinsp;2025</span><span
-        class="flex-1 bg-green-950 h-[0.5px]"></span><span>Řevnice</span>
-    </p>
-    <div class="max-w-[42rem] mx-auto mt-12">
+    <div class="max-w-[42rem] mx-auto mt-12 px-4 sm:px-8">
       <P>
         <i>
           Třetí ročník našeho skvělého festivalu. I letos zazní kapela, která
@@ -51,7 +53,7 @@ import "../styles/global.css";
         </A>
       </P>
     </div>
-    <div class="max-w-xl mx-auto">
+    <div class="max-w-xl mx-auto px-4">
       <H2>
         <span class="flex items-center gap-1.5"> Za kolik to bude? </span>
       </H2>
