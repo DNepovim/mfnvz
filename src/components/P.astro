@@ -1,3 +1,10 @@
-<p class="mb-10 text-lg">
+---
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+<p class={`mb-10 text-lg ${className}`}>
   <slot />
 </p>
