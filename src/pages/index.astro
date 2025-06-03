@@ -6,6 +6,7 @@ import H2 from "../components/H2.astro";
 import P from "../components/P.astro";
 import A from "../components/A.astro";
 import FacebookIcon from "../components/FacebookIcon.astro";
+import Section from "../components/Section.astro";
 
 import "../styles/global.css";
 ---
@@ -33,15 +34,15 @@ import "../styles/global.css";
         <span>13.&thinsp;6.&thinsp;2025, Řevnice</span>
       </p>
       <p
-        class="text-md mt-8 sm:text-2xl font-thin px-4 gap-4 flex items-center mb-8"
+        class="text-md max-sm:flex-wrap mt-8 sm:text-2xl font-thin px-4 gap-4 flex items-center mb-8"
       >
-        <span>Audio Attaché</span>
-        <span class="flex-1 bg-green-950 h-[0.5px]"></span>
-        <span>V procesu</span>
-        <span class="flex-1 bg-green-950 h-[0.5px]"></span>
-        <span>Melamed Klezmer Band</span>
+        <span class="whitespace-nowrap">Melamed Klezmer Band</span>
         <span class="flex-1 bg-green-950 h-[0.5px]"></span>
         <span>Kongruence</span>
+        <span class="flex-1 bg-green-950 h-[0.5px] max-sm:hidden"></span>
+        <span class="whitespace-nowrap">V procesu</span>
+        <span class="flex-1 bg-green-950 h-[0.5px]"></span>
+        <span class="whitespace-nowrap">Audio Attaché</span>
       </p>
     </div>
     <div class="max-w-[46rem] mx-auto mt-12 px-4 sm:px-8">
