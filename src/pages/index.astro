@@ -2,11 +2,16 @@
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import coverLarge from "../assets/cover.jpg";
+import melamedSrc from "../assets/melamed.jpg";
+import kongruenceSrc from "../assets/kongruence.jpg";
+import vProcesuSrc from "../assets/vprocesu.jpeg";
+import aaSrc from "../assets/aa.jpg";
 import H2 from "../components/H2.astro";
 import P from "../components/P.astro";
 import A from "../components/A.astro";
 import FacebookIcon from "../components/FacebookIcon.astro";
 import Section from "../components/Section.astro";
+import SubSection from "../components/SubSection.astro";
 
 import "../styles/global.css";
 ---
@@ -38,73 +43,154 @@ import "../styles/global.css";
       >
         <span class="whitespace-nowrap">Melamed Klezmer Band</span>
         <span class="flex-1 bg-green-950 h-[0.5px]"></span>
-        <span>Kongruence</span>
-        <span class="flex-1 bg-green-950 h-[0.5px] max-sm:hidden"></span>
-        <span class="whitespace-nowrap">V procesu</span>
-        <span class="flex-1 bg-green-950 h-[0.5px]"></span>
-        <span class="whitespace-nowrap">Audio Attaché</span>
+        <div class="px-4 sm:px-8">
+          <span>Kongruence</span>
+          <span class="flex-1 bg-green-950 h-[0.5px] max-sm:hidden"></span>
+          <span class="whitespace-nowrap">V procesu</span>
+          <span class="flex-1 bg-green-950 h-[0.5px]"></span>
+          <span class="whitespace-nowrap">Audio Attaché</span>
+        </div>
       </p>
-    </div>
-    <div class="max-w-[46rem] mx-auto mt-12 px-4 sm:px-8">
-      <P className="text-2xl">
-        <i>
-          Třetí ročník našeho skvělého festivalu. I letos zazní kapela, která
-          dřív jinde nezazněla. I letos zazní žánr, který u nás dřív nezazněl. I
-          letos zazní kapela Kongruence. Co to znamená? Kdo u nás tedy letos
-          vystoupí? To vám dáme již brzy vědět. Zatím si umyjte půlitry.
-        </i>
-      </P>
-    </div>
-    <div class="max-w-xl mx-auto px-4">
-      <P>
-        <A href="https://fb.me/e/3aKjFh135">
-          <span class="flex items-center gap-2">
-            <FacebookIcon class="w-5 h-5" />
-            Chceš být v obraze? Sleduj událost na facebooku.
-          </span>
-        </A>
-      </P>
-      <Section title=" Za kolik to bude? ">
-        Vstupné, stravné a ubytné... dobrovolné. Máte moc? Dejte moc. Máte málo?
-        Dejte málo. Nemáte nic? Nedávejte nic. Tak jednoduché to je.
-      </Section>
-      <Section title="Co s sebou?">
-        Chceš-li pít, vem si sklenici či hrnek. Chceš-li jíst, vem si misku a
-        příbor. Žádné jednorázové ptákoviny na místě nebudou. Proč bychom také
-        kupovali něco, co máte všichni doma, že? A pokud rád vaříš, pečeš, či
-        jinak připravuješ pokrmy, neboj se přinést něco na ochutnání na náš
-        řevnicko-švédský stůl.
-      </Section>
-      <Section title="Mohu u vás přespat?">
-        Ano! A budeme rádi. Spacák si můžete rozložit kdekoli na zahradě a i v
-        domě se místo najde. Stan bude také kde postavit. V sobotu můžete
-        vyrazit na výlet. Třeba na <A href="https://mapy.cz/s/hufosecago"
-          >Babku</A
-        >. Úschova zavazadel v domě po celý den je v ceně.
-      </Section>
-      <Section title="A co děti?">
-        Máme na zahradě pískoviště, dětský hrad s klouzačkou a pro ty starší
-        skvělý ořech. A třeba se vám podaří domluvit s někým, kdo vám je chvíli
-        pohlídá.
-      </Section>
-      <Section title="A co psi?">
-        Nejméně jeden na zahradě určitě bude. Labrador jménem Bady. S jinými psy
-        vychází nanejvýš dobře. Klidně mu přiveďte kamarády.
-      </Section>
-      <Section title="Kde ta zahrada valstně je?">
-        V Řevnicích. <A href="https://mapy.cz/s/cagafosesu">Žižkova 257</A>.
-      </Section>
-      <Section title="Fakt je to už třetí ročník?">
-        Ano. Koukni! <br />
-        1. ročník – <A
-          href="https://eu.zonerama.com/JakubProchazka/Album/9939770?fbclid=IwY2xjawJiLqlleHRuA2FlbQIxMQABHqUxfw_qHjd8e0Bg9j1dP7Hm5Muw-e4NfWAUyhgQmcTfUFoIQ5jjk_Pqi6R3_aem_KxBdPJsAlGn0mEZ7CYQKYg"
-          >fotky</A
-        >, <A href="https://fb.me/e/Z6MWWpRb">událost</A>. <br />
-        2. ročník – <A
-          href="https://eu.zonerama.com/JakubProchazka/Album/11625210?fbclid=IwY2xjawJiLs5leHRuA2FlbQIxMQABHpYEv1B6ivwBspGdp3uqHzVrNUKmiOJlnL58nurcHc30wK08nfWVRvhvfzYY_aem_JBtPEOJ76zi_YOJIjVjHow"
-          >fotky</A
-        >, <A href="https://fb.me/e/7xDjv46p7">událost</A>.
-      </Section>
+      <div class="max-w-[46rem] mx-auto mt-12 px-4 sm:px-8">
+        <P className="text-2xl">
+          <i>
+            Třetí ročník našeho skvělého festivalu. I letos zazní kapela, která
+            dřív jinde nezazněla. I letos zazní žánr, který u nás dřív nezazněl.
+            I letos zazní kapela Kongruence. Co to znamená? Kdo u nás tedy letos
+            vystoupí? To vám dáme již brzy vědět. Zatím si umyjte půlitry.
+          </i>
+        </P>
+      </div>
+      <div class="max-w-xl mx-auto px-4">
+        <P>
+          <A href="https://fb.me/e/3aKjFh135">
+            <span class="flex items-center gap-2">
+              <FacebookIcon class="w-5 h-5" />
+              Chceš být v obraze? Sleduj událost na facebooku.
+            </span>
+          </A>
+        </P>
+        <Section title=" Za kolik to bude? ">
+          Vstupné, stravné a ubytné... dobrovolné. Máte moc? Dejte moc. Máte
+          málo? Dejte málo. Nemáte nic? Nedávejte nic. Tak jednoduché to je.
+        </Section>
+        <Section title="Co s sebou?">
+          Chceš-li pít, vem si sklenici či hrnek. Chceš-li jíst, vem si misku a
+          příbor. Žádné jednorázové ptákoviny na místě nebudou. Proč bychom také
+          kupovali něco, co máte všichni doma, že? A pokud rád vaříš, pečeš, či
+          jinak připravuješ pokrmy, neboj se přinést něco na ochutnání na náš
+          řevnicko-švédský stůl.
+        </Section>
+        <Section title="Bude co pít? Bude co jíst?"
+          >Ano. I letos dovalíme sud piva z řevnického pivovaru. I nějaká
+          limonáda bude. A Vítek bude grilovat klobásy z řevnického Řeznictví.</Section
+        >
+        <Section title="Mohu u vás přespat?">
+          Ano! A budeme rádi. Spacák si můžete rozložit kdekoli na zahradě a i v
+          domě se místo najde. Stan bude také kde postavit. V sobotu můžete
+          vyrazit na výlet. Třeba na <A href="https://mapy.cz/s/hufosecago"
+            >Babku</A
+          >. Úschova zavazadel v domě po celý den je v ceně.
+        </Section>
+        <Section title="A co děti?">
+          Máme na zahradě pískoviště, dětský hrad s klouzačkou a pro ty starší
+          skvělý ořech. A třeba se vám podaří domluvit s někým, kdo vám je
+          chvíli pohlídá.
+        </Section>
+        <Section title="A co psi?">
+          Nejméně jeden na zahradě určitě bude. Labrador jménem Bady. S jinými
+          psy vychází nanejvýš dobře. Klidně mu přiveďte kamarády.
+        </Section>
+        <Section title="Kde ta zahrada valstně je?">
+          V Řevnicích. <A href="https://mapy.cz/s/cagafosesu">Žižkova 257</A>.
+        </Section>
+        <H2>A kdo tam tedy bude hrát?</H2>
+        <Image
+          src={melamedSrc}
+          alt="Melamed Klezmer Band"
+          class="w-full h-full rounded-lg"
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
+        />
+        <SubSection
+          title="Melamed Klezmer Band"
+          subtitle="Jindra, Kulich a Eliška hráli Šanson na prvním ročníku našeho festivalu. Elišku jsme pozvali i rok na to s jejími folkovými písničkami. Jindrovi a Kulichovi to bylo líto, tak jsme je pozvali letos. Bez Elišky. Ale s Ájou. Jo, a Kulich to celé zvučí."
+          link="https://harmonikar.net/melamed-klezmer-band/"
+        >
+          Byl jednou jeden učitel. Učitel akordeonu. No prostě harmonikář.
+          Učitel se řekne hebrejsky melamed. Náhoda tomu chtěla, že se tenhle
+          melamed potkal s jednou paní, která měla léta doma ve skříni
+          zapomenutý klarinet. A protože do mariáše musejí být tři, přizvali k
+          sobě ještě jednoho melameda, který nosil v kapse karty. Tenhle melamed
+          hrál náhodou na kytaru. A tak vznikl Melamed Klezmer Band, kapela,
+          která si mezi pivem a partií mariáše zahraje nějakou tu vesele tklivou
+          židovskou melodii.
+        </SubSection>
+        <Image
+          src={kongruenceSrc}
+          alt="Melamed Klezmer Band"
+          class="w-full h-full rounded-lg"
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
+        />
+        <SubSection
+          title="Kongruence"
+          link="https://www.kongruence.cz/"
+          subtitle="Pan domácí kdysi založil kapelu. A protože neměla kde hrát, založil i festival. Toto je ten festival a toto je ta kapela. Po dvou a půl letech stále nemá kde hrát, tak stále hraje tady."
+        >
+          Tři lidé na jednatřicet strun. Melancholické písně od lásky k
+          filosofii a zase zpátky. Trochu folk a trochu taky ne…
+        </SubSection>
+        <Image
+          src={vProcesuSrc}
+          alt="V procesu"
+          class="w-full h-full rounded-lg"
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
+        />
+        <SubSection
+          title="V procesu"
+          subtitle="Znáte to. Půjčíte kamarádovi akordeon, on vezme ženu a švagrovou a kapela je na světě. Klasický příběh, který má své vyústění na našem festivalu."
+        >
+          Tři rodinní příslušníci budou hrát a zpívat jemný indie bedroom pop a
+          folk. O autentičnosti života a procesu. Z nástrojů zazní třeba kytara,
+          basa, housle, akordeon, klavír, a šlapka.
+        </SubSection>
+        <Image
+          src={melamedSrc}
+          alt="Audio Attaché"
+          class="w-full h-full rounded-lg"
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
+        />
+        <SubSection
+          title="Audio Attaché"
+          link="http://www.yannicksouth.com/aa/"
+          subtitle="To jsme takhle seděli s Ájou na mariáši a ona povídá, že zná výbornou kapelu plnou řevnických patriotů. Nakonec se ukázalo, že z Řevnic je jen jeden z nich a to ještě kdo ví. Ale výborná kapela to je. To zase ano."
+        >
+          Audio attaché je pražská indie kapela, dvě kytary, basa, trochu kláves
+          a bicí. Její zvuk je charakteristický proplétáním zvukových ploch nad
+          groovem rytmiky. Zásadní jsou české texty s originální poetikou a
+          pohledem na svět.
+        </SubSection>
+        <SubSection title="Kde kdo...">
+          V deset José, který k nám kvůli tomu přijede až z Mexika, třením dřev
+          rozdělá oheň. Vytáhneme kytary (letos doopravdy) a budeme békat, dokud
+          bude co pít a možná i déle.
+        </SubSection>
+
+        <Section title="Fakt je to už třetí ročník?">
+          Ano. Koukni! <br />
+          1. ročník – <A
+            href="https://eu.zonerama.com/JakubProchazka/Album/9939770?fbclid=IwY2xjawJiLqlleHRuA2FlbQIxMQABHqUxfw_qHjd8e0Bg9j1dP7Hm5Muw-e4NfWAUyhgQmcTfUFoIQ5jjk_Pqi6R3_aem_KxBdPJsAlGn0mEZ7CYQKYg"
+            >fotky</A
+          >, <A href="https://fb.me/e/Z6MWWpRb">událost</A>. <br />
+          2. ročník – <A
+            href="https://eu.zonerama.com/JakubProchazka/Album/11625210?fbclid=IwY2xjawJiLs5leHRuA2FlbQIxMQABHpYEv1B6ivwBspGdp3uqHzVrNUKmiOJlnL58nurcHc30wK08nfWVRvhvfzYY_aem_JBtPEOJ76zi_YOJIjVjHow"
+            >fotky</A
+          >, <A href="https://fb.me/e/7xDjv46p7">událost</A>.
+        </Section>
+      </div>
     </div>
   </main>
 </Layout>
