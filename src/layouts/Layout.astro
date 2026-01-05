@@ -1,19 +1,22 @@
 ---
-import Analytics from '@vercel/analytics/astro'
+import Analytics from "@vercel/analytics/astro";
+import "../styles/global.css";
 ---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Malý festival na velké zahradě</title>
-    <link rel="stylesheet" href="https://use.typekit.net/tai1czq.css">
-	</head>
-	<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Malý festival na velké zahradě</title>
+    <link rel="stylesheet" href="https://use.typekit.net/tai1czq.css" />
+  </head>
+  <body>
     <Analytics />
+    <main class="max-w-6xl mx-auto py-2 sm:py-4 px-4 sm:px-8">
       <slot />
-	</body>
+    </main>
+  </body>
 </html>
-

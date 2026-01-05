@@ -1,0 +1,36 @@
+---
+import { CldImage } from "astro-cloudinary";
+
+type Props = {
+  image: string;
+  title: string;
+  subtitle?: string;
+  subsubtitle?: string;
+};
+
+const { image, title, subtitle, subsubtitle } = Astro.props;
+---
+
+<CldImage
+  src={image}
+  alt={subtitle ? `${title} ${subtitle}` : title}
+  class="w-full h-full rounded-lg"
+  sizes="(min-width: 1150px) 1088px, calc(100vw - 4rem)"
+  width={1088}
+  height={725}
+/>
+
+<h1 class="font-head -mt-[13vw] sm:-mt-[8rem] z-20 pl-4">
+  <span class="text-white text-[9vw] sm:text-[5rem]">{title}</span>
+  {
+    subtitle && (
+      <span class="font-head text-[5vw] sm:text-[3rem] mb-4 block relative overflow-hidden">
+        {subtitle}
+      </span>
+    )
+  }
+</h1>
+
+<p class="text-lg sm:text-xl font-thin px-4 gap-4 flex items-center mb-4">
+  {subsubtitle && <span>{subsubtitle}</span>}
+</p>

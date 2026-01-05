@@ -1,7 +1,7 @@
 ---
-interface Props {
+type Props = {
   href: string;
-}
+};
 
 const { href } = Astro.props;
 const isExternal = href.startsWith("http");

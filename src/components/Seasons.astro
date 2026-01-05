@@ -1,0 +1,43 @@
+---
+import { CldImage } from "astro-cloudinary";
+import { getCollection } from "astro:content";
+import H2 from "../components/H2.astro";
+
+const seasons = await getCollection("seasons");
+const [_, ...prevSeasons] = seasons.toSorted(
+  (a, b) => Number(b.id) - Number(a.id),
+);
+---
+
+<section>
+  <H2>Předchozí ročníky</H2>
+  <div class="grid sm:grid-cols-2 gap-4">
+    {
+      prevSeasons.map((s) => (
+        <a
+          class="relative block overflow-hidden group rounded-lg"
+          href={`/rocnik/${s.id}`}
+        >
+          <CldImage
+            src={s.data.cover}
+            alt={s.id}
+            class="w-full rounded-lg group-hover:scale-115 transition-transform duration-700 origin-top"
+            sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
+            width={264}
+            height={176}
+          />
+          <p class="flex flex-col ml-2 gap-2 font-head -mt-11 relative">
+            <>
+              <span class="text-3xl text-white">
+                {Number(s.id) - 2022}. ročník
+              </span>
+              <span class="text-xl group-hover:text-white transition-colors duration-700">
+                {s.data.date.toLocaleDateString("cs-CZ")}
+              </span>
+            </>
+          </p>
+        </a>
+      ))
+    }
+  </div>
+</section>

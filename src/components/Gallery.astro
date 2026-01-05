@@ -1,0 +1,119 @@
+---
+import H2 from "./H2.astro";
+import { CldImage } from "astro-cloudinary";
+import { getCldImageUrl } from "astro-cloudinary/helpers";
+import cloudinary from "cloudinary";
+
+interface Props {
+  year: string;
+}
+
+const { year } = Astro.props;
+
+const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME;
+const apiKey = import.meta.env.PUBLIC_CLOUDINARY_API_KEY;
+const apiSecret = import.meta.env.CLOUDINARY_API_SECRET;
+
+const getCloudinaryImages = async (folder: string): Promise<string[]> => {
+  if (!apiKey || !apiSecret) {
+    console.warn(
+      "Cloudinary API credentials not found. Please provide imageIds prop or set PUBLIC_CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET",
+    );
+    return [];
+  }
+
+  try {
+    cloudinary.v2.config({
+      cloud_name: cloudName,
+      api_key: apiKey,
+      api_secret: apiSecret,
+    });
+
+    const result = await cloudinary.v2.search
+      .expression(`folder:${folder}/* AND tags:promotion`)
+      .max_results(500)
+      .execute();
+
+    return result.resources.map(
+      (resource: { public_id: string }) => resource.public_id,
+    );
+  } catch (error) {
+    console.error("Error fetching images from Cloudinary:", error);
+    return [];
+  }
+};
+
+const imagePublicIds = await getCloudinaryImages(year);
+
+const lightboxImages = imagePublicIds.map((publicId) => {
+  return getCldImageUrl({
+    src: publicId,
+    width: 1920,
+    quality: 90,
+    format: "auto",
+  });
+});
+
+const galleryId = `gallery-${year}`;
+---
+
+{
+  imagePublicIds.length > 0 && (
+    <section class="mt-16">
+      <div class="max-w-xl mx-auto px-4">
+        <H2>Fotky</H2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id={galleryId}>
+        {imagePublicIds.map((publicId, index) => (
+          <a
+            href={lightboxImages[index]}
+            class={` glightbox rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity ${[0, 5, 9, 14, 18].includes(index) ? "row-span-2 col-span-2" : ""}`}
+            data-gallery={galleryId}
+          >
+            <CldImage
+              src={publicId}
+              width={1088}
+              height={725}
+              alt=""
+              loading="lazy"
+              class="w-full h-full object-cover"
+              sizes="(max-width: 640px) 50vw, 20vw"
+              crop="fill"
+              quality={80}
+              format="auto"
+            />
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<script define:vars={{ galleryId }} is:inline>
+  (function () {
+    // Load GLightbox from CDN
+    if (document.querySelector('script[src*="glightbox"]')) return;
+
+    const script = document.createElement("script");
+    script.src =
+      "https://cdn.jsdelivr.net/npm/glightbox@3/dist/js/glightbox.min.js";
+    script.onload = function () {
+      if (window.GLightbox) {
+        window.GLightbox({
+          selector: `.glightbox[data-gallery="${galleryId}"]`,
+        });
+      }
+    };
+    document.head.appendChild(script);
+
+    // Also load CSS if not already loaded
+    if (!document.querySelector('link[href*="glightbox"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href =
+        "https://cdn.jsdelivr.net/npm/glightbox@3/dist/css/glightbox.min.css";
+      document.head.appendChild(link);
+    }
+  })();
+</script>
