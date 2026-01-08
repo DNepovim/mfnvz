@@ -5,6 +5,7 @@ import { CldImage } from "astro-cloudinary";
 import { getCldImageUrl } from "astro-cloudinary/helpers";
 import cloudinary from "cloudinary";
 import { cn } from "../utils/cn";
+import Skeleton from "./Skeleton.astro";
 
 interface Props {
   year: string;
@@ -72,7 +73,7 @@ const isHigher = (index: number, pattern: number[], start?: number): boolean =>
         <a
           href={lightboxImages[index]}
           class={cn(
-            "glightbox rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity",
+            "relative glightbox rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity",
             index === 0 && "col-start-2 col-span-2 row-span-2",
             index === 1 && "col-start-1 w-2/3 mt-auto ml-auto",
             index === 2 && "col-start-1",
@@ -80,18 +81,21 @@ const isHigher = (index: number, pattern: number[], start?: number): boolean =>
             isHigher(index, [0, 6, 9, 12, 14]) && "row-span-2",
           )}
           data-gallery={galleryId}
+          data-image-index={index}
         >
+          <Skeleton class="absolute inset-0 w-full h-full z-0" />
           <CldImage
             src={publicId}
             width={1088}
             height={725}
             alt=""
             loading="lazy"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover relative z-10 opacity-0 transition-opacity duration-300"
             sizes="(max-width: 640px) 50vw, 20vw"
             crop="fill"
             quality={80}
             format="auto"
+            data-image-index={index}
           />
         </a>
       ))}
@@ -101,6 +105,45 @@ const isHigher = (index: number, pattern: number[], start?: number): boolean =>
 
 <script define:vars={{ galleryId }} is:inline>
   (function () {
+    // Handle image loading - hide skeleton when image loads
+    function handleImageLoad() {
+      const gallery = document.getElementById(galleryId);
+      if (!gallery) return;
+
+      const images = gallery.querySelectorAll("img[data-image-index]");
+      images.forEach((img) => {
+        const handleLoad = () => {
+          img.classList.add("opacity-100");
+          const skeleton = img.parentElement?.querySelector(".bg-gray-300");
+          if (skeleton) {
+            skeleton.style.display = "none";
+          }
+        };
+
+        if (img.complete && img.naturalHeight !== 0) {
+          // Image already loaded
+          handleLoad();
+        } else {
+          // Wait for image to load
+          img.addEventListener("load", handleLoad, { once: true });
+          img.addEventListener("error", () => {
+            // Hide skeleton even on error
+            const skeleton = img.parentElement?.querySelector(".bg-gray-300");
+            if (skeleton) {
+              skeleton.style.display = "none";
+            }
+          }, { once: true });
+        }
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", handleImageLoad);
+    } else {
+      // DOM already loaded, but images might not be in DOM yet
+      setTimeout(handleImageLoad, 0);
+    }
+
     // Load GLightbox from CDN
     if (document.querySelector('script[src*="glightbox"]')) return;
 

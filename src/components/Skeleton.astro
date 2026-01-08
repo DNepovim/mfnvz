@@ -1,0 +1,13 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div
+  class={`bg-gray-300 animate-pulse rounded-lg ${className}`}
+  aria-label="Loading..."
+></div>
+
