@@ -6233,12 +6233,14 @@ __metadata:
     eslint-plugin-svelte: "npm:^3.12.5"
     eslint-plugin-unused-imports: "npm:^4.3.0"
     glightbox: "npm:^3.3.1"
+    narrowland: "npm:^1.4.0"
     prettier: "npm:^3.6.2"
     prettier-plugin-astro: "npm:^0.14.1"
     prettier-plugin-svelte: "npm:^3.4.0"
     prettier-plugin-tailwindcss: "npm:^0.6.14"
     svelte: "npm:^5.46.1"
     svelte-eslint-parser: "npm:^0.41.1"
+    tailwind-merge: "npm:^3.4.0"
     tailwindcss: "npm:^4.0.9"
     tailwindcss-debug-screens: "npm:^3.0.1"
     typescript-eslint: "npm:^8.47.0"
@@ -6858,6 +6860,13 @@ __metadata:
   bin:
     nanoid: bin/nanoid.cjs
   checksum: 10c0/4b1bb29f6cfebf3be3bc4ad1f1296fb0a10a3043a79f34fbffe75d1621b4318319211cd420549459018ea3592f0d2f159247a6f874911d6d26eaaadda2478120
+  languageName: node
+  linkType: hard
+
+"narrowland@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "narrowland@npm:1.4.0"
+  checksum: 10c0/08f1287ef7b1b732c67f38a65abe95690548486904a7bb4f5f5ad28c36ac3630912c96ce49915e4c3e45381197c254bf36ce03d2917ce9b230a3123c353eef89
   languageName: node
   linkType: hard
 
@@ -8917,6 +8926,13 @@ __metadata:
   dependencies:
     "@pkgr/core": "npm:^0.2.9"
   checksum: 10c0/f0761495953d12d94a86edf6326b3a565496c72f9b94c02549b6961fb4d999f4ca316ce6b3eb8ed2e4bfc5056a8de65cda0bd03a233333a35221cd2fdc0e196b
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "tailwind-merge@npm:3.4.0"
+  checksum: 10c0/eaf17bb695c51c7bb7a90366a9c62be295473ee97fcfd1da54287714d4a5788a88ff4ad1ab9e0128638257fda777d6c9ea88682e36195e31a7fa2cf43f45e310
   languageName: node
   linkType: hard
 

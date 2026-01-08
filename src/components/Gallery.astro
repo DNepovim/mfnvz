@@ -1,14 +1,17 @@
 ---
+import { isOneOf } from "narrowland";
 import H2 from "./H2.astro";
 import { CldImage } from "astro-cloudinary";
 import { getCldImageUrl } from "astro-cloudinary/helpers";
 import cloudinary from "cloudinary";
+import { cn } from "../utils/cn";
 
 interface Props {
   year: string;
+  showOnlyPromotion?: boolean;
 }
 
-const { year } = Astro.props;
+const { year, showOnlyPromotion } = Astro.props;
 
 const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME;
 const apiKey = import.meta.env.PUBLIC_CLOUDINARY_API_KEY;
@@ -30,7 +33,9 @@ const getCloudinaryImages = async (folder: string): Promise<string[]> => {
     });
 
     const result = await cloudinary.v2.search
-      .expression(`folder:${folder}/* AND tags:promotion`)
+      .expression(
+        `folder:${folder}/*${showOnlyPromotion ? "AND tags:promotion" : ""}`,
+      )
       .max_results(500)
       .execute();
 
@@ -55,38 +60,42 @@ const lightboxImages = imagePublicIds.map((publicId) => {
 });
 
 const galleryId = `gallery-${year}`;
+
+const isHigher = (index: number, pattern: number[], start?: number): boolean =>
+  pattern.includes((index - (start ?? 0)) % (pattern.toReversed()[0] ?? 0));
 ---
 
 {
   imagePublicIds.length > 0 && (
-    <section class="mt-16">
-      <div class="max-w-xl mx-auto px-4">
-        <H2>Fotky</H2>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id={galleryId}>
-        {imagePublicIds.map((publicId, index) => (
-          <a
-            href={lightboxImages[index]}
-            class={` glightbox rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity ${[0, 5, 9, 14, 18].includes(index) ? "row-span-2 col-span-2" : ""}`}
-            data-gallery={galleryId}
-          >
-            <CldImage
-              src={publicId}
-              width={1088}
-              height={725}
-              alt=""
-              loading="lazy"
-              class="w-full h-full object-cover"
-              sizes="(max-width: 640px) 50vw, 20vw"
-              crop="fill"
-              quality={80}
-              format="auto"
-            />
-          </a>
-        ))}
-      </div>
-    </section>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id={galleryId}>
+      {imagePublicIds.map((publicId, index) => (
+        <a
+          href={lightboxImages[index]}
+          class={cn(
+            "glightbox rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity",
+            index === 0 && "col-start-2 col-span-2 row-span-2",
+            index === 1 && "col-start-1 w-2/3 mt-auto ml-auto",
+            index === 2 && "col-start-1",
+            isHigher(index, [0, 6, 14], 4) && "col-span-2 row-span-2",
+            isHigher(index, [0, 6, 9, 12, 14]) && "row-span-2",
+          )}
+          data-gallery={galleryId}
+        >
+          <CldImage
+            src={publicId}
+            width={1088}
+            height={725}
+            alt=""
+            loading="lazy"
+            class="w-full h-full object-cover"
+            sizes="(max-width: 640px) 50vw, 20vw"
+            crop="fill"
+            quality={80}
+            format="auto"
+          />
+        </a>
+      ))}
+    </div>
   )
 }
 
