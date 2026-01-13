@@ -10,7 +10,7 @@ import tseslint from 'typescript-eslint'
 
 
 export default defineConfig(
-  globalIgnores(['.astro/*']),
+  globalIgnores(['.astro/*', '**/*.astro/**/*.ts']),
   eslint.configs.recommended,
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylisticTypeChecked,
@@ -23,11 +23,13 @@ export default defineConfig(
         fetch: 'readonly',
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
+        requestAnimationFrame: 'readonly',
         alert: 'readonly',
         console: 'readonly',
         Request: 'readonly',
         Response: 'readonly',
         Headers: 'readonly',
+        JSX: 'readonly',
       },
       parserOptions: {
         project: true,

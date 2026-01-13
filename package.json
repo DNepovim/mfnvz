@@ -6,7 +6,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "typecheck": "tsc",
+    "lint:check": "eslint './src/**/*.{ts,tsx,js,cjs,mjs,svelte,astro}'",
+    "lint:fix": "eslint --fix --cache './src/**/*.{ts,tsx,js,cjs,mjs,svelte,astro}'",
+    "format:check": "prettier --check '**/*.{ts,tsx,js,cjs,json,svg}'",
+    "format:write": "prettier --write --cache 'src/**/*.{ts,tsx,js,cjs,json,svg}'"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -45,6 +50,7 @@
     "prettier-plugin-tailwindcss": "^0.6.14",
     "svelte-eslint-parser": "^0.41.1",
     "tailwindcss-debug-screens": "^3.0.1",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.47.0",
     "vite": "^7.1.9"
   }

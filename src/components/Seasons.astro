@@ -12,8 +12,8 @@ const [_, ...prevSeasons] = seasons.toSorted(
 <section>
   <H2>Předchozí ročníky</H2>
   <div class="grid sm:grid-cols-2 gap-4">
-    {
-      prevSeasons.map((s) => (
+    {prevSeasons.map((s): JSX.Element => {
+      return (
         <a
           class="relative block overflow-hidden group rounded-lg"
           href={`/rocnik/${s.id}`}
@@ -37,7 +37,7 @@ const [_, ...prevSeasons] = seasons.toSorted(
             </>
           </p>
         </a>
-      ))
-    }
+      );
+    })}
   </div>
 </section>

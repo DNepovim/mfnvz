@@ -1,5 +1,5 @@
 ---
-import Cover from "../components/Cover.astro";
+import Cover from "../components/Cover.svelte";
 import Seasons from "../components/Seasons.astro";
 import { getEntry, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
@@ -25,6 +25,7 @@ const { Content } = await render(post);
 
 <Layout>
   <Cover
+    client:load
     image={post.data.cover}
     title="Malý festival"
     subtitle="na velké zahradě"
@@ -37,7 +38,7 @@ const { Content } = await render(post);
   <div class="max-w-xl mx-auto px-4">
     <Seasons />
     <Content
-      components={{ h2: H2, h3: H3, p: P, a: A, ul: Ul, img: Img, hr: Hr }}
+      components={{ h2: H2, h3: H3, p: P, a: A, ul: Ul, img: Img, hr: Hr } as Record<string, unknown>}
     />
   </div>
 

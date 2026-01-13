@@ -1,22 +1,20 @@
 ---
-import { isOneOf } from "narrowland";
-import H2 from "./H2.astro";
 import { CldImage } from "astro-cloudinary";
 import { getCldImageUrl } from "astro-cloudinary/helpers";
 import cloudinary from "cloudinary";
 import { cn } from "../utils/cn";
 import Skeleton from "./Skeleton.astro";
 
-interface Props {
+type Props = {
   year: string;
   showOnlyPromotion?: boolean;
-}
+};
 
 const { year, showOnlyPromotion } = Astro.props;
 
-const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME;
-const apiKey = import.meta.env.PUBLIC_CLOUDINARY_API_KEY;
-const apiSecret = import.meta.env.CLOUDINARY_API_SECRET;
+const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME as string;
+const apiKey = import.meta.env.PUBLIC_CLOUDINARY_API_KEY as string | undefined;
+const apiSecret = import.meta.env.CLOUDINARY_API_SECRET as string | undefined;
 
 const getCloudinaryImages = async (folder: string): Promise<string[]> => {
   if (!apiKey || !apiSecret) {
@@ -27,23 +25,26 @@ const getCloudinaryImages = async (folder: string): Promise<string[]> => {
   }
 
   try {
+    if (!apiKey || !apiSecret) {
+      return [];
+    }
     cloudinary.v2.config({
       cloud_name: cloudName,
       api_key: apiKey,
       api_secret: apiSecret,
     });
 
-    const result = await cloudinary.v2.search
+    const result = (await cloudinary.v2.search
       .expression(
         `folder:${folder}/*${showOnlyPromotion ? "AND tags:promotion" : ""}`,
       )
       .max_results(500)
-      .execute();
+      .execute()) as { resources: { public_id: string }[] };
 
     return result.resources.map(
       (resource: { public_id: string }) => resource.public_id,
     );
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error fetching images from Cloudinary:", error);
     return [];
   }
@@ -69,36 +70,38 @@ const isHigher = (index: number, pattern: number[], start?: number): boolean =>
 {
   imagePublicIds.length > 0 && (
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id={galleryId}>
-      {imagePublicIds.map((publicId, index) => (
-        <a
-          href={lightboxImages[index]}
-          class={cn(
-            "relative glightbox rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity",
-            index === 0 && "col-start-2 col-span-2 row-span-2",
-            index === 1 && "col-start-1 w-2/3 mt-auto ml-auto",
-            index === 2 && "col-start-1",
-            isHigher(index, [0, 6, 14], 4) && "col-span-2 row-span-2",
-            isHigher(index, [0, 6, 9, 12, 14]) && "row-span-2",
-          )}
-          data-gallery={galleryId}
-          data-image-index={index}
-        >
-          <Skeleton class="absolute inset-0 w-full h-full z-0" />
-          <CldImage
-            src={publicId}
-            width={1088}
-            height={725}
-            alt=""
-            loading="lazy"
-            class="w-full h-full object-cover relative z-10 opacity-0 transition-opacity duration-300"
-            sizes="(max-width: 640px) 50vw, 20vw"
-            crop="fill"
-            quality={80}
-            format="auto"
+      {imagePublicIds.map((publicId, index): JSX.Element => {
+        return (
+          <a
+            href={lightboxImages[index]}
+            class={cn(
+              "relative glightbox rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity",
+              index === 0 && "col-start-2 col-span-2 row-span-2",
+              index === 1 && "col-start-1 w-2/3 mt-auto ml-auto",
+              index === 2 && "col-start-1",
+              isHigher(index, [0, 6, 14], 4) && "col-span-2 row-span-2",
+              isHigher(index, [0, 6, 9, 12, 14]) && "row-span-2",
+            )}
+            data-gallery={galleryId}
             data-image-index={index}
-          />
-        </a>
-      ))}
+          >
+            <Skeleton class="absolute inset-0 w-full h-full z-0" />
+            <CldImage
+              src={publicId}
+              width={1088}
+              height={725}
+              alt=""
+              loading="lazy"
+              class="w-full h-full object-cover relative z-10 opacity-0 transition-opacity duration-300"
+              sizes="(max-width: 640px) 50vw, 20vw"
+              crop="fill"
+              quality={80}
+              format="auto"
+              data-image-index={index}
+            />
+          </a>
+        );
+      })}
     </div>
   )
 }

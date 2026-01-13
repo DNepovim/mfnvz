@@ -2,11 +2,11 @@
 import P from "./P.astro";
 import A from "./A.astro";
 
-interface Props {
+type Props = {
   title?: string;
   link?: string;
   subtitle?: string;
-}
+};
 
 const { title, subtitle, link } = Astro.props;
 ---

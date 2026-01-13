@@ -50,7 +50,7 @@ const { Content } = await render(post);
 
   <div class="max-w-xl mx-auto px-4">
     <Content
-      components={{ h2: H2, h3: H3, p: P, a: A, ul: Ul, img: Img, hr: Hr }}
+      components={{ h2: H2, h3: H3, p: P, a: A, ul: Ul, img: Img, hr: Hr } as Record<string, unknown>}
     />
   </div>
   <section class="mt-16">
