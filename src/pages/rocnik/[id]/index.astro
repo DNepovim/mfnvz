@@ -1,6 +1,6 @@
 ---
 import Hr from "../../../components/Hr.astro";
-import Cover from "../../../components/Cover.astro";
+import Cover from "../../../components/Cover.svelte";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import H2 from "../../../components/H2.astro";
@@ -40,6 +40,7 @@ const { Content } = await render(post);
     <menu><li></li></menu>
   </header>
   <Cover
+    client:load
     image={post.data.cover}
     title="3. ročník"
     subtitle={post.data.date.toLocaleDateString("cs-CZ")}
