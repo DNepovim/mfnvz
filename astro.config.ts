@@ -9,6 +9,8 @@ import { loadEnv } from "vite";
 
 import { envConfig } from "./env.config.ts";
 
+import icon from "astro-icon";
+
 const { SITE_URL } = loadEnv(process.env.SITE_URL ?? "", process.cwd(), "");
 const { VERCEL_URL } = loadEnv(process.env.VERCEL_URL ?? "", process.cwd(), "");
 const { ENV_NAME } = loadEnv(process.env.ENV_NAME ?? "", process.cwd(), "");
@@ -24,6 +26,7 @@ export default defineConfig({
     sitemap(),
     ENV_NAME === "production" && sitemap({ lastmod: new Date() }),
     svelte(),
+    icon(),
   ],
 
   vite: {

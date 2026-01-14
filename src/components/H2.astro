@@ -1,10 +1,11 @@
 ---
-import TreeIcon from "./TreeIcon.astro";
+import { Icon } from "astro-icon/components";
 ---
 
-<h2 class="font-head text-4xl items-start mb-4 sm:relative flex gap-2">
-  <TreeIcon
-    class="w-8 h-8 mt-2 flex-[2rem_0_0] sm:absolute sm:-left-2 sm:-translate-x-full"
+<h2 class="font-head text-4xl items-start mb-6 mt-16 sm:relative flex gap-2">
+  <Icon
+    name="ph:tree"
+    class="w-8 h-8 mt-2 flex-[2rem_0_0] sm:absolute sm:-left-6 sm:-translate-x-full"
   />
   <slot />
 </h2>
