@@ -10,7 +10,7 @@ import tseslint from 'typescript-eslint'
 
 
 export default defineConfig(
-  globalIgnores(['.astro/*']),
+  globalIgnores(['.astro/*', 'dist/*', '.vercel/*']),
   eslint.configs.recommended,
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylisticTypeChecked,
