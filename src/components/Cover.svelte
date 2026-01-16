@@ -8,16 +8,15 @@
     subsubtitle?: string;
   };
 
-  const props = $props<Props>() as Props;
-  const { image, title, subtitle, subsubtitle } = props;
+  const { image, title, subtitle, subsubtitle }: Props = $props();
 
-  const imageUrl = getCldImageUrl({
+  const imageUrl = $derived(getCldImageUrl({
     src: image,
     width: 1088,
     height: 725,
-  });
+  }));
 
-  const alt: string = subtitle ? `${title} ${subtitle}` : title;
+  const alt = $derived(subtitle ? `${title} ${subtitle}` : title);
 
   let imageElement: HTMLImageElement;
   let imageBottomDistance = $state<number | null>(null);

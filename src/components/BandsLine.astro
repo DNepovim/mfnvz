@@ -10,13 +10,11 @@ const { bands } = Astro.props;
   class="text-md max-sm:flex-wrap mt-8 sm:text-2xl font-thin px-4 gap-4 flex items-center mb-8"
 >
   {
-    bands.map((b, i): JSX.Element => {
-      return (
-        <>
-          <span class="whitespace-nowrap">{b}</span>
-          {i < bands.length - 1 && <span class="flex-1 bg-gray-700 h-[0.5px]" />}
-        </>
-      );
-    })
+    bands.map((b, i): unknown => (
+      <>
+        <span class="whitespace-nowrap">{b}</span>
+        {i < bands.length - 1 && <span class="flex-1 bg-gray-700 h-[0.5px]" />}
+      </>
+    ))
   }
 </p>

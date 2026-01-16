@@ -83,6 +83,7 @@ export default defineConfig(
       'sonarjs/no-duplicate-string': 'off',
       'sonarjs/no-small-switch': 'off',
       'sonarjs/no-identical-functions': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
     },
   },
 )
