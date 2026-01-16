@@ -358,7 +358,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudinary-util/types@npm:1.6.0":
+"@cloudinary-util/types@npm:1.5.11":
+  version: 1.5.11
+  resolution: "@cloudinary-util/types@npm:1.5.11"
+  checksum: 10c0/bd6b476b9c2c972eeb704663e3f9dd69628de48efc07190c209dcd3ebaf3a7d67d312e444a3ac07af3d0a3c0f4fc3cbcbf22d72f7eaf3c32536e0bb19cfdf586
+  languageName: node
+  linkType: hard
+
+"@cloudinary-util/types@npm:1.6.0, @cloudinary-util/types@npm:^1.5.11":
   version: 1.6.0
   resolution: "@cloudinary-util/types@npm:1.6.0"
   checksum: 10c0/4ee14676c68664ab4d438059ab59d1ff1bc5134463d79d0062230a2b564b3108611c98ea00437e28291a16ee6789685445ffb5086e4c8327a8646e49a17beb4e
@@ -376,6 +383,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cloudinary-util/url-loader@npm:^5.10.6":
+  version: 5.10.6
+  resolution: "@cloudinary-util/url-loader@npm:5.10.6"
+  dependencies:
+    "@cloudinary-util/types": "npm:1.5.11"
+    "@cloudinary-util/util": "npm:4.0.0"
+    "@cloudinary/url-gen": "npm:1.15.0"
+    zod: "npm:^3.22.4"
+  checksum: 10c0/99a8226940118245fac3a30dd302c8a7c7889f077d0f370f488a43793562bb9861c20ff99f8451fd524dc58ee42f4ae163ab61dbba393d2401812984f91510a5
+  languageName: node
+  linkType: hard
+
+"@cloudinary-util/util@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@cloudinary-util/util@npm:4.0.0"
+  checksum: 10c0/0ae1aaeec9ba26513d1ba742b3c7db7fd3aacf0c6a4efc289a14ad2a69fdfaf2bc7ac9992b7463718a758c1f68ed5d22780ea697e98c6e4107e8b1deeecd404a
+  languageName: node
+  linkType: hard
+
 "@cloudinary-util/util@npm:4.1.0":
   version: 4.1.0
   resolution: "@cloudinary-util/util@npm:4.1.0"
@@ -383,7 +409,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudinary-util/util@npm:^4.1.0":
+"@cloudinary-util/util@npm:^4.0.0, @cloudinary-util/util@npm:^4.1.0":
   version: 4.2.0
   resolution: "@cloudinary-util/util@npm:4.2.0"
   checksum: 10c0/56daca18df5c654e2540c91bd2f929dc455c67b15c6f04365d8bc52e60219c2588260e2739b19fc8d38aec60638455d643b2fb07d881aae76443ac6c7d1b4f4a
@@ -1254,7 +1280,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.28":
+"@jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.25, @jridgewell/trace-mapping@npm:^0.3.28":
   version: 0.3.31
   resolution: "@jridgewell/trace-mapping@npm:0.3.31"
   dependencies:
@@ -2535,6 +2561,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unpic/svelte@npm:0.0.53":
+  version: 0.0.53
+  resolution: "@unpic/svelte@npm:0.0.53"
+  dependencies:
+    "@unpic/core": "npm:0.0.49"
+    style-object-to-css-string: "npm:1.1.3"
+    unpic: "npm:^3.18.0"
+  peerDependencies:
+    svelte: "*"
+  checksum: 10c0/a1d7af212f3f2bafd1898783ce952cb0965c0d218b30713fe3250e4fcd6ec60d9f5077edd38fcd04073a1652935f51b3682bdfc2d2e52f0a47de726ce7c42936
+  languageName: node
+  linkType: hard
+
 "@vercel/analytics@npm:^1.5.0":
   version: 1.5.0
   resolution: "@vercel/analytics@npm:1.5.0"
@@ -3341,7 +3380,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^4.0.3":
+"chokidar@npm:^4.0.1, chokidar@npm:^4.0.3":
   version: 4.0.3
   resolution: "chokidar@npm:4.0.3"
   dependencies:
@@ -4757,6 +4796,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fdir@npm:^6.2.0, fdir@npm:^6.4.4, fdir@npm:^6.5.0":
+  version: 6.5.0
+  resolution: "fdir@npm:6.5.0"
+  peerDependencies:
+    picomatch: ^3 || ^4
+  peerDependenciesMeta:
+    picomatch:
+      optional: true
+  checksum: 10c0/e345083c4306b3aed6cb8ec551e26c36bab5c511e99ea4576a16750ddc8d3240e63826cc624f5ae17ad4dc82e68a253213b60d556c11bfad064b7607847ed07f
+  languageName: node
+  linkType: hard
+
 "fdir@npm:^6.4.3":
   version: 6.4.3
   resolution: "fdir@npm:6.4.3"
@@ -4766,18 +4817,6 @@ __metadata:
     picomatch:
       optional: true
   checksum: 10c0/d13c10120e9625adf21d8d80481586200759928c19405a816b77dd28eaeb80e7c59c5def3e2941508045eb06d34eb47fad865ccc8bf98e6ab988bb0ed160fb6f
-  languageName: node
-  linkType: hard
-
-"fdir@npm:^6.4.4, fdir@npm:^6.5.0":
-  version: 6.5.0
-  resolution: "fdir@npm:6.5.0"
-  peerDependencies:
-    picomatch: ^3 || ^4
-  peerDependenciesMeta:
-    picomatch:
-      optional: true
-  checksum: 10c0/e345083c4306b3aed6cb8ec551e26c36bab5c511e99ea4576a16750ddc8d3240e63826cc624f5ae17ad4dc82e68a253213b60d556c11bfad064b7607847ed07f
   languageName: node
   linkType: hard
 
@@ -5002,13 +5041,6 @@ __metadata:
   version: 2.0.0
   resolution: "github-slugger@npm:2.0.0"
   checksum: 10c0/21b912b6b1e48f1e5a50b2292b48df0ff6abeeb0691b161b3d93d84f4ae6b1acd6ae23702e914af7ea5d441c096453cf0f621b72d57893946618d21dd1a1c486
-  languageName: node
-  linkType: hard
-
-"glightbox@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "glightbox@npm:3.3.1"
-  checksum: 10c0/02aa97dbafece20027032a6dad19d3827ee18ac002b07e4e3c38e541a6efb0d67971b9d25fb019ac61e6a1a90dd08b3f1b2c69f759003706b22a1d3260bf1a89
   languageName: node
   linkType: hard
 
@@ -6579,7 +6611,6 @@ __metadata:
     eslint-plugin-sonarjs: "npm:^3.0.5"
     eslint-plugin-svelte: "npm:^3.12.5"
     eslint-plugin-unused-imports: "npm:^4.3.0"
-    glightbox: "npm:^3.3.1"
     iconify-icon: "npm:^3.0.2"
     narrowland: "npm:^1.4.0"
     prettier: "npm:^3.6.2"
@@ -6587,7 +6618,10 @@ __metadata:
     prettier-plugin-svelte: "npm:^3.4.0"
     prettier-plugin-tailwindcss: "npm:^0.6.14"
     svelte: "npm:^5.46.1"
+    svelte-check: "npm:^4.3.5"
+    svelte-cloudinary: "npm:^2.3.1"
     svelte-eslint-parser: "npm:^0.41.1"
+    svelte-lightbox: "npm:^1.1.7"
     tailwind-merge: "npm:^3.4.0"
     tailwindcss: "npm:^4.0.9"
     tailwindcss-debug-screens: "npm:^3.0.1"
@@ -7166,6 +7200,13 @@ __metadata:
     pkg-types: "npm:^1.3.1"
     ufo: "npm:^1.6.1"
   checksum: 10c0/f174b844ae066c71e9b128046677868e2e28694f0bbeeffbe760b2a9d8ff24de0748d0fde6fabe706700c1d2e11d3c0d7a53071b5ea99671592fac03364604ab
+  languageName: node
+  linkType: hard
+
+"mri@npm:^1.1.0":
+  version: 1.2.0
+  resolution: "mri@npm:1.2.0"
+  checksum: 10c0/a3d32379c2554cf7351db6237ddc18dc9e54e4214953f3da105b97dc3babe0deb3ffe99cf409b38ea47cc29f9430561ba6b53b24ab8f9ce97a4b50409e4a50e7
   languageName: node
   linkType: hard
 
@@ -8676,6 +8717,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sade@npm:^1.7.4":
+  version: 1.8.1
+  resolution: "sade@npm:1.8.1"
+  dependencies:
+    mri: "npm:^1.1.0"
+  checksum: 10c0/da8a3a5d667ad5ce3bf6d4f054bbb9f711103e5df21003c5a5c1a8a77ce12b640ed4017dd423b13c2307ea7e645adee7c2ae3afe8051b9db16a6f6d3da3f90b1
+  languageName: node
+  linkType: hard
+
 "safe-array-concat@npm:^1.1.3":
   version: 1.1.3
   resolution: "safe-array-concat@npm:1.1.3"
@@ -9230,6 +9280,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"style-object-to-css-string@npm:1.1.3":
+  version: 1.1.3
+  resolution: "style-object-to-css-string@npm:1.1.3"
+  checksum: 10c0/e1dfa7ab10fe4e2fe6935b832609d275239419ded8f489cae95348ddf12b9a3d83af4d407fb02617a6d71df5eaf0be417a8cb86b847e4e0335217fe729d734d9
+  languageName: node
+  linkType: hard
+
 "style-to-js@npm:^1.0.0":
   version: 1.1.21
   resolution: "style-to-js@npm:1.1.21"
@@ -9284,6 +9341,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"svelte-check@npm:^4.3.5":
+  version: 4.3.5
+  resolution: "svelte-check@npm:4.3.5"
+  dependencies:
+    "@jridgewell/trace-mapping": "npm:^0.3.25"
+    chokidar: "npm:^4.0.1"
+    fdir: "npm:^6.2.0"
+    picocolors: "npm:^1.0.0"
+    sade: "npm:^1.7.4"
+  peerDependencies:
+    svelte: ^4.0.0 || ^5.0.0-next.0
+    typescript: ">=5.0.0"
+  bin:
+    svelte-check: bin/svelte-check
+  checksum: 10c0/a9196c61b9aea4dd597f268362452189df81db08332477727037d5270fad4de733addf6954b57aeeb6825df34f9b20a282ec16f964186c82f39f8456bc4a533c
+  languageName: node
+  linkType: hard
+
+"svelte-cloudinary@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "svelte-cloudinary@npm:2.3.1"
+  dependencies:
+    "@cloudinary-util/types": "npm:^1.5.11"
+    "@cloudinary-util/url-loader": "npm:^5.10.6"
+    "@cloudinary-util/util": "npm:^4.0.0"
+    "@unpic/svelte": "npm:0.0.53"
+    defu: "npm:^6.1.4"
+  peerDependencies:
+    svelte: ^3.0.0 || ^4.0.0 || ^5.0.0
+  checksum: 10c0/4d0d08b5e93973a0bea602225f04a7a109c691d9093154c8ed8883ca6e2c8f4ec2f177fe4543ebaecd49a53dea33dde8c1b1d75c472718f317655270ddcfb9d9
+  languageName: node
+  linkType: hard
+
 "svelte-eslint-parser@npm:^0.41.1":
   version: 0.41.1
   resolution: "svelte-eslint-parser@npm:0.41.1"
@@ -9318,6 +9408,15 @@ __metadata:
     svelte:
       optional: true
   checksum: 10c0/67283b6cb6eee400a3a68e9d33a2f7373695a50a28df487260414d9cea776eba2d195c57cda4cc1597e01790f1ceb9880b77d12f09f9ed5c8acb1b26733e08db
+  languageName: node
+  linkType: hard
+
+"svelte-lightbox@npm:^1.1.7":
+  version: 1.1.7
+  resolution: "svelte-lightbox@npm:1.1.7"
+  peerDependencies:
+    svelte: ^3.25.0 || ^4.0.0 || ^5.0.0
+  checksum: 10c0/97a03179ce0471324c8e23b337351820ba2df2a0b6965d07cb7c2ac7e9357a4207d70f4284dcb661526aaf8a4a1546ad3d28814ccb4134d3450560807c6ffaea
   languageName: node
   linkType: hard
 
@@ -10523,17 +10622,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"zod@npm:^3.22.4, zod@npm:^3.25.76":
+  version: 3.25.76
+  resolution: "zod@npm:3.25.76"
+  checksum: 10c0/5718ec35e3c40b600316c5b4c5e4976f7fee68151bc8f8d90ec18a469be9571f072e1bbaace10f1e85cf8892ea12d90821b200e980ab46916a6166a4260a983c
+  languageName: node
+  linkType: hard
+
 "zod@npm:^3.24.2":
   version: 3.24.2
   resolution: "zod@npm:3.24.2"
   checksum: 10c0/c638c7220150847f13ad90635b3e7d0321b36cce36f3fc6050ed960689594c949c326dfe2c6fa87c14b126ee5d370ccdebd6efb304f41ef5557a4aaca2824565
-  languageName: node
-  linkType: hard
-
-"zod@npm:^3.25.76":
-  version: 3.25.76
-  resolution: "zod@npm:3.25.76"
-  checksum: 10c0/5718ec35e3c40b600316c5b4c5e4976f7fee68151bc8f8d90ec18a469be9571f072e1bbaace10f1e85cf8892ea12d90821b200e980ab46916a6166a4260a983c
   languageName: node
   linkType: hard
 

@@ -6,12 +6,13 @@ import Layout from "../../../layouts/Layout.astro";
 import H2 from "../../../components/H2.astro";
 import H3 from "../../../components/H3.astro";
 import P from "../../../components/P.astro";
-import Gallery from "../../../components/Gallery.astro";
+import Gallery from "../../../components/Gallery.svelte";
 import BandsLine from "../../../components/BandsLine.astro";
 import Img from "../../../components/Img.astro";
 import Ul from "../../../components/Ul.astro";
 import A from "../../../components/A.astro";
 import Claim from "../../../components/Claim.astro";
+import { getCloudinaryImages } from "../../../utils/cloudinary";
 
 export async function getStaticPaths() {
   const posts = await getCollection("seasons");
@@ -27,6 +28,7 @@ type Props = {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const imagePublicIds = await getCloudinaryImages({ folder: post.id, showOnlyPromotion: true });
 ---
 
 <Layout>
@@ -58,7 +60,7 @@ const { Content } = await render(post);
     <div class="max-w-xl mx-auto px-4">
       <H2>Obrázky</H2>
     </div>
-    <Gallery year={post.id} showOnlyPromotion />
+    <Gallery client:visible year={post.id} imagePublicIds={imagePublicIds} />
     <div
       class="relative flex justify-center after:bg-black after:w-80 after:block after:absolute after:top-[52%] after:h-[1px]"
     >

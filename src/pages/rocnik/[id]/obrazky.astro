@@ -1,7 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
-import Gallery from "../../../components/Gallery.astro";
+import Gallery from "../../../components/Gallery.svelte";
+import { getCloudinaryImages } from "../../../utils/cloudinary";
 
 export async function getStaticPaths() {
   const posts = await getCollection("seasons");
@@ -16,6 +17,7 @@ type Props = {
 };
 
 const { post } = Astro.props;
+const imagePublicIds = await getCloudinaryImages({ folder: post.id });
 ---
 
 <Layout>
@@ -33,5 +35,5 @@ const { post } = Astro.props;
       </span>
     </h1>
   </header>
-  <Gallery year={post.id} />
+  <Gallery client:visible year={post.id} imagePublicIds={imagePublicIds} />
 </Layout>

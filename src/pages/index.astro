@@ -6,13 +6,14 @@ import Layout from "../layouts/Layout.astro";
 import H2 from "../components/H2.astro";
 import H3 from "../components/H3.astro";
 import P from "../components/P.astro";
-import Gallery from "../components/Gallery.astro";
+import Gallery from "../components/Gallery.svelte";
 import BandsLine from "../components/BandsLine.astro";
 import Img from "../components/Img.astro";
 import Ul from "../components/Ul.astro";
 import A from "../components/A.astro";
 import Hr from "../components/Hr.astro";
 import Claim from "../components/Claim.astro";
+import { getCloudinaryImages } from "../utils/cloudinary";
 
 const post = await getEntry("seasons", "2026");
 
@@ -21,6 +22,7 @@ if (!post) {
 }
 
 const { Content } = await render(post);
+const imagePublicIds = await getCloudinaryImages({ folder: post.id });
 ---
 
 <Layout>
@@ -42,5 +44,5 @@ const { Content } = await render(post);
     />
   </div>
 
-  <Gallery year={post.id} />
+  <Gallery client:visible year={post.id} imagePublicIds={imagePublicIds} />
 </Layout>
