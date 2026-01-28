@@ -59,6 +59,7 @@
               height={1600}
               alt=""
               loading="lazy"
+              format="webp"
               sizes="(max-width: 640px) 50vw, 20vw"
               objectFit="cover"
               crop="auto"
@@ -75,18 +76,32 @@
         {/each}
       </svelte:fragment>
       {#each imagePublicIds as publicId, index (publicId)}
-        <GalleryImage id={index}>
+        <GalleryImage id={index} class="h-[80vh] w-[80vw]">
           <CldImage
             src={publicId}
             width={1920}
             height={1280}
             alt=""
             loading="lazy"
+            format="webp"
             crop="fill"
             sizes="90vw"
+            class="w-[80vw] h-[80vh]"
           />
         </GalleryImage>
       {/each}
     </LightboxGallery>
   </div>
 {/if}
+
+<style>
+  :global {
+    .svelte-lightbox-body {
+      width: 90vw !important;
+      height: 90vh !important;
+    }
+    .svelte-lightbox-footer {
+      display: none !important;
+    }
+  }
+</style>
