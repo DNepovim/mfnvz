@@ -10,6 +10,7 @@ import { loadEnv } from "vite";
 import { envConfig } from "./env.config.ts";
 
 import icon from "astro-icon";
+import { imageService } from "@unpic/astro/service";
 
 const { SITE_URL } = loadEnv(process.env.SITE_URL ?? "", process.cwd(), "");
 const { VERCEL_URL } = loadEnv(process.env.VERCEL_URL ?? "", process.cwd(), "");
@@ -44,4 +45,11 @@ export default defineConfig({
       enabled: true,
     },
   }),
+
+  image: {
+    service: imageService({
+      placeholder: "lqip",
+    }),
+  },
 });
+

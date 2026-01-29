@@ -16,8 +16,9 @@ const { image, title, subtitle, subsubtitle } = Astro.props;
   alt={subtitle ? `${title} ${subtitle}` : title}
   class="w-full h-full rounded-lg"
   sizes="(min-width: 1150px) 1088px, calc(100vw - 4rem)"
-  width={1088}
-  height={725}
+  width={2400}
+  height={1600}
+  breakpoints={[300, 400, 500, 600, 700, 800, 900, 1000, 1100, 2100]}
 />
 
 <h1 class="font-head -mt-[13vw] sm:-mt-[8rem] z-20 pl-4">

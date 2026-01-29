@@ -30,9 +30,18 @@
     pattern.includes((index - (start ?? 0)) % (pattern.toReversed()[0] ?? 0));
 
   let loadedImages = $state<Set<number>>(new Set());
+  let loadedFullSizeImages = $state<Set<number>>(new Set());
 
   function handleImageLoad(index: number) {
     loadedImages = new Set([...loadedImages, index]);
+  }
+
+  function handleFullSizeImageLoad(index: number) {
+    loadedFullSizeImages = new Set([...loadedFullSizeImages, index]);
+  }
+
+  function getPlaceholderUrl(publicId: string): string {
+    return `https://res.cloudinary.com/${cloudName}/image/upload/w_40,h_40,q_auto:low,e_blur:300,f_webp/${publicId}`;
   }
 </script>
 
@@ -76,7 +85,14 @@
         {/each}
       </svelte:fragment>
       {#each imagePublicIds as publicId, index (publicId)}
-        <GalleryImage id={index} class="h-[80vh] w-[80vw]">
+        <GalleryImage id={index} class="h-[80vh] w-[80vw] relative">
+          <div
+            class={cn(
+              "absolute inset-0 w-[80vw] h-[80vh] bg-cover bg-center transition-opacity duration-300",
+              loadedFullSizeImages.has(index) ? "opacity-0" : "opacity-100",
+            )}
+            style={`background-image: url('${getPlaceholderUrl(publicId)}');`}
+          ></div>
           <CldImage
             src={publicId}
             width={1920}
@@ -86,7 +102,13 @@
             format="webp"
             crop="fill"
             sizes="90vw"
-            class="w-[80vw] h-[80vh]"
+            class={cn(
+              "w-[80vw] h-[80vh] relative z-10 transition-opacity duration-300",
+              loadedFullSizeImages.has(index) ? "opacity-100" : "opacity-0",
+            )}
+            onload={() => {
+              handleFullSizeImageLoad(index);
+            }}
           />
         </GalleryImage>
       {/each}
