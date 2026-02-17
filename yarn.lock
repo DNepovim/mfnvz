@@ -6621,7 +6621,6 @@ __metadata:
     svelte-check: "npm:^4.3.5"
     svelte-cloudinary: "npm:^2.3.1"
     svelte-eslint-parser: "npm:^0.41.1"
-    svelte-lightbox: "npm:^1.1.7"
     tailwind-merge: "npm:^3.4.0"
     tailwindcss: "npm:^4.0.9"
     tailwindcss-debug-screens: "npm:^3.0.1"
@@ -9408,15 +9407,6 @@ __metadata:
     svelte:
       optional: true
   checksum: 10c0/67283b6cb6eee400a3a68e9d33a2f7373695a50a28df487260414d9cea776eba2d195c57cda4cc1597e01790f1ceb9880b77d12f09f9ed5c8acb1b26733e08db
-  languageName: node
-  linkType: hard
-
-"svelte-lightbox@npm:^1.1.7":
-  version: 1.1.7
-  resolution: "svelte-lightbox@npm:1.1.7"
-  peerDependencies:
-    svelte: ^3.25.0 || ^4.0.0 || ^5.0.0
-  checksum: 10c0/97a03179ce0471324c8e23b337351820ba2df2a0b6965d07cb7c2ac7e9357a4207d70f4284dcb661526aaf8a4a1546ad3d28814ccb4134d3450560807c6ffaea
   languageName: node
   linkType: hard
 
