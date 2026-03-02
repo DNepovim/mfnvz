@@ -15,7 +15,6 @@ const config = {
   tailwindFunctions: ["cva", "cn"],
   importOrder: [
     "^astro(:.*)?$",
-    "^(react|react-dom|preact(?:/.*)?)$",
     "<THIRD_PARTY_MODULES>",
     "",
     "^@/.*$",

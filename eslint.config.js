@@ -15,6 +15,7 @@ export default defineConfig(
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylisticTypeChecked,
   sonarjs.configs.recommended,
+
   {
     languageOptions: {
       globals: {
@@ -36,6 +37,7 @@ export default defineConfig(
     },
     plugins: {
       'unused-imports': unusedImports,
+
     },
     rules: {
       '@typescript-eslint/no-unused-vars': 'off',
