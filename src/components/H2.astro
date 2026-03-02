@@ -1,8 +1,20 @@
 ---
 import { Icon } from "astro-icon/components";
+
+import { cn } from "../utils/cn";
+type Props = {
+  className?: string;
+};
+
+const { className } = Astro.props;
 ---
 
-<h2 class="font-head text-4xl items-start mb-6 mt-16 sm:relative flex gap-2">
+<h2
+  class={cn(
+    "font-head text-4xl items-start mb-6 mt-16 sm:relative flex gap-2",
+    className,
+  )}
+>
   <Icon
     name="ph:tree"
     class="w-8 h-8 mt-2 flex-[2rem_0_0] sm:absolute sm:-left-6 sm:-translate-x-full"

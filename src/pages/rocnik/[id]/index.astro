@@ -12,6 +12,7 @@ import Img from "../../../components/Img.astro";
 import Ul from "../../../components/Ul.astro";
 import A from "../../../components/A.astro";
 import Claim from "../../../components/Claim.astro";
+import SeasonTile from "../../../components/SeasonTile.astro";
 import { getCloudinaryImages } from "../../../utils/cloudinary";
 
 export async function getStaticPaths() {
@@ -28,7 +29,14 @@ type Props = {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const imagePublicIds = await getCloudinaryImages({ folder: post.id, showOnlyPromotion: true });
+const imagePublicIds = await getCloudinaryImages({
+  folder: post.id,
+  showOnlyPromotion: true,
+});
+
+const seasonsSorted = (await getCollection("seasons")).toSorted(
+  (a, b) => Number(b.id) - Number(a.id),
+);
 ---
 
 <Layout>
@@ -53,7 +61,15 @@ const imagePublicIds = await getCloudinaryImages({ folder: post.id, showOnlyProm
 
   <div class="max-w-xl mx-auto px-4">
     <Content
-      components={{ h2: H2, h3: H3, p: P, a: A, ul: Ul, img: Img, hr: Hr } as Record<string, unknown>}
+      components={{
+        h2: H2,
+        h3: H3,
+        p: P,
+        a: A,
+        ul: Ul,
+        img: Img,
+        hr: Hr,
+      } as Record<string, unknown>}
     />
   </div>
   <section class="mt-16">
@@ -62,12 +78,24 @@ const imagePublicIds = await getCloudinaryImages({ folder: post.id, showOnlyProm
     </div>
     <Gallery client:visible year={post.id} imagePublicIds={imagePublicIds} />
     <div
-      class="relative flex justify-center after:bg-black after:w-80 after:block after:absolute after:top-[52%] after:h-[1px]"
+      class="relative flex justify-center after:bg-gray-700 after:w-80 after:block after:absolute after:top-[52%] after:h-[0.5px]"
     >
       <a
         class="text-xl px-4 text-center bg-white py-4 my-8 relative z-10 hover:bg-transparent transition-colors duration-500"
         href={`/rocnik/${post.id}/obrazky`}>Všechny obrázky</a
       >
+    </div>
+  </section>
+  <section class="mt-16 px-4">
+    <div class="max-w-xl mx-auto px-4">
+      <H2>Všechny ročníky</H2>
+    </div>
+    <div class="flex justify-center gap-4 max-lg:flex-wrap">
+      {
+        seasonsSorted.map((s): unknown => (
+          <SeasonTile season={s} isActive={s.id === post.id} />
+        ))
+      }
     </div>
   </section>
 </Layout>
