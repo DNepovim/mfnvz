@@ -35,8 +35,9 @@ const imagePublicIds = await getCloudinaryImages({
 });
 
 const seasonsSorted = (await getCollection("seasons")).toSorted(
-  (a, b) => Number(b.id) - Number(a.id),
+  (a, b) => Number(a.id) - Number(b.id),
 );
+const currentIndex = seasonsSorted.findIndex((s) => s.id === post.id);
 ---
 
 <Layout>
@@ -92,8 +93,14 @@ const seasonsSorted = (await getCollection("seasons")).toSorted(
     </div>
     <div class="flex justify-center gap-4 max-lg:flex-wrap">
       {
-        seasonsSorted.map((s): unknown => (
-          <SeasonTile season={s} isActive={s.id === post.id} />
+        seasonsSorted.map((s, i): unknown => (
+          <SeasonTile
+            season={s}
+            isActive={s.id === post.id}
+            direction={
+              i < currentIndex ? "next" : i > currentIndex ? "prev" : undefined
+            }
+          />
         ))
       }
     </div>

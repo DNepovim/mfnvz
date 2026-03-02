@@ -6,6 +6,7 @@ import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import { loadEnv } from "vite";
+import swup, { Theme } from "@swup/astro";
 
 import { envConfig } from "./env.config.ts";
 
@@ -28,6 +29,9 @@ export default defineConfig({
     ENV_NAME === "production" && sitemap({ lastmod: new Date() }),
     svelte(),
     icon(),
+    swup({
+      theme: Theme.fade,
+    }),
   ],
 
   vite: {
@@ -52,4 +56,3 @@ export default defineConfig({
     }),
   },
 });
-
