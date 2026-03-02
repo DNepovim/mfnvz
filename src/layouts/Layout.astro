@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from "astro:transitions";
+
 import Analytics from "@vercel/analytics/astro";
 import "../styles/global.css";
 ---
@@ -12,6 +14,7 @@ import "../styles/global.css";
     <meta name="generator" content={Astro.generator} />
     <title>Malý festival na velké zahradě</title>
     <link rel="stylesheet" href="https://use.typekit.net/tai1czq.css" />
+    <ClientRouter />
   </head>
   <body>
     <Analytics />
