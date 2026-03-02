@@ -13,15 +13,14 @@ import { envConfig } from "./env.config.ts";
 import icon from "astro-icon";
 import { imageService } from "@unpic/astro/service";
 
-const { SITE_URL, ENV_NAME } = loadEnv("", process.cwd(), "");
+const { SITE_URL } = loadEnv("", process.cwd(), "");
 
 export default defineConfig({
   env: envConfig,
   site: SITE_URL ?? "http://localhost:4321",
   integrations: [
     mdx(),
-    (ENV_NAME ?? "staging") === "production" &&
-      sitemap({ lastmod: new Date() }),
+    sitemap({ lastmod: new Date() }),
     svelte(),
     icon(),
     swup({
