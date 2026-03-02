@@ -13,19 +13,15 @@ import { envConfig } from "./env.config.ts";
 import icon from "astro-icon";
 import { imageService } from "@unpic/astro/service";
 
-const { SITE_URL } = loadEnv(process.env.SITE_URL ?? "", process.cwd(), "");
-const { VERCEL_URL } = loadEnv(process.env.VERCEL_URL ?? "", process.cwd(), "");
-const { ENV_NAME } = loadEnv(process.env.ENV_NAME ?? "", process.cwd(), "");
+const { SITE_URL, ENV_NAME } = loadEnv("", process.cwd(), "");
 
 export default defineConfig({
   env: envConfig,
-  site:
-    SITE_URL ??
-    (VERCEL_URL ? `https://${VERCEL_URL}` : "http://localhost:4321/"),
-
+  site: SITE_URL ?? "http://localhost:4321",
   integrations: [
     mdx(),
-    ENV_NAME === "production" && sitemap({ lastmod: new Date() }),
+    (ENV_NAME ?? "staging") === "production" &&
+      sitemap({ lastmod: new Date() }),
     svelte(),
     icon(),
     swup({
