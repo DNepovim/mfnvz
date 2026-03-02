@@ -25,7 +25,6 @@ export default defineConfig({
 
   integrations: [
     mdx(),
-    sitemap(),
     ENV_NAME === "production" && sitemap({ lastmod: new Date() }),
     svelte(),
     icon(),
