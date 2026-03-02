@@ -1,7 +1,7 @@
 <script lang="ts">
   import { CldImage, configureCloudinary } from "svelte-cloudinary";
-  import { cn } from "../utils/cn";
-  import Lightbox from "./Lightbox.svelte";
+  import { cn } from "@/utils/cn";
+  import Lightbox from "@/components/Lightbox.svelte";
   import { PUBLIC_CLOUDINARY_CLOUD_NAME } from "astro:env/client";
 
   configureCloudinary({ cloudName: PUBLIC_CLOUDINARY_CLOUD_NAME });

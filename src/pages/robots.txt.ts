@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 
-import PRODUCTION_ROBOTS_TXT from "../configs/robots/production.robots.txt?raw";
-import STAGING_ROBOTS_TXT from "../configs/robots/staging.robots.txt?raw";
+import PRODUCTION_ROBOTS_TXT from "@/configs/robots/production.robots.txt?raw";
+import STAGING_ROBOTS_TXT from "@/configs/robots/staging.robots.txt?raw";
 
 const SITEMAP_URL_PLACEHOLDER = "{{SITEMAP_URL}}";
 

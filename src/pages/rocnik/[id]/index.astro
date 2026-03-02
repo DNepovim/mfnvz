@@ -1,18 +1,18 @@
 ---
-import Hr from "../../../components/Hr.astro";
-import Cover from "../../../components/Cover.svelte";
+import Hr from "@/components/Hr.astro";
+import Cover from "@/components/Cover.svelte";
 import { getCollection, render, type CollectionEntry } from "astro:content";
-import Layout from "../../../layouts/Layout.astro";
-import H2 from "../../../components/H2.astro";
-import H3 from "../../../components/H3.astro";
-import P from "../../../components/P.astro";
-import Gallery from "../../../components/Gallery.svelte";
-import BandsLine from "../../../components/BandsLine.astro";
-import Img from "../../../components/Img.astro";
-import Ul from "../../../components/Ul.astro";
-import A from "../../../components/A.astro";
-import Claim from "../../../components/Claim.astro";
-import { getCloudinaryImages } from "../../../utils/cloudinary";
+import Layout from "@/layouts/Layout.astro";
+import H2 from "@/components/H2.astro";
+import H3 from "@/components/H3.astro";
+import P from "@/components/P.astro";
+import Gallery from "@/components/Gallery.svelte";
+import BandsLine from "@/components/BandsLine.astro";
+import Img from "@/components/Img.astro";
+import Ul from "@/components/Ul.astro";
+import A from "@/components/A.astro";
+import Claim from "@/components/Claim.astro";
+import { getCloudinaryImages } from "@/utils/cloudinary";
 
 export async function getStaticPaths() {
   const posts = await getCollection("seasons");
