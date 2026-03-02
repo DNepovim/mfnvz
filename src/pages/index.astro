@@ -25,7 +25,7 @@ const { Content } = await render(post);
 const imagePublicIds = await getCloudinaryImages({ folder: post.id });
 ---
 
-<Layout>
+<Layout currentSeasonId={post.id}>
   <Cover
     client:load
     image={post.data.cover}

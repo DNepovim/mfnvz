@@ -1,0 +1,66 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import FacebookIcon from "./FacebookIcon.astro";
+import SeasonTile from "./SeasonTile.astro";
+
+type Props = {
+  currentSeasonId?: string;
+};
+
+const { currentSeasonId } = Astro.props;
+
+const seasons = (await getCollection("seasons")).toSorted(
+  (a, b) => Number(b.id) - Number(a.id),
+);
+const [currentSeason] = seasons;
+const activeSeasonId = currentSeasonId ?? currentSeason?.id;
+---
+
+<footer
+  class="mt-16 border-t border-gray-300 px-4 text-xl flex flex-col gap-32 py-8"
+>
+  <div class="flex max-lg:flex-wrap justify-center gap-4">
+    {
+      seasons.map((s) => (
+        <SeasonTile season={s} isActive={activeSeasonId === s.id} />
+      ))
+    }
+  </div>
+  <div class="justify-around flex flex-col gap-4 md:flex-row md:items-center">
+    {
+      currentSeason?.data.fbEventLink && (
+        <>
+          <a
+            class="flex gap-2 items-start"
+            href={currentSeason.data.fbEventLink}
+            target="_blank"
+          >
+            <FacebookIcon class="w-6 h-6 mt-1" />
+            <span>sleduj událost na facebooku</span>
+          </a>
+          <span class="hidden md:block flex-1 bg-gray-700 h-[0.5px]" />
+        </>
+      )
+    }
+
+    <a
+      class="flex gap-2 items-start"
+      href="mailto:principal@mfnvz.cz"
+      target="_blank"
+    >
+      <Icon name="ph:envelope-simple" class="w-6 h-6 mt-1" />
+      principal@mfnvz.cz
+    </a>
+    <span class="hidden md:block flex-1 bg-gray-700 h-[0.5px]"></span>
+
+    <a
+      class="flex gap-2 items-start"
+      href="https://mapy.cz/s/cagafosesu"
+      target="_blank"
+    >
+      <Icon name="ph:map-pin" class="w-6 h-6 mt-1" />
+      Žižkova 257 Řevnice
+    </a>
+  </div>
+</footer>

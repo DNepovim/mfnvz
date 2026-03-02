@@ -1,6 +1,13 @@
 ---
 import Analytics from "@vercel/analytics/astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+
+type Props = {
+  currentSeasonId?: string;
+};
+
+const { currentSeasonId } = Astro.props;
 ---
 
 <!doctype html>
@@ -15,8 +22,12 @@ import "../styles/global.css";
   </head>
   <body>
     <Analytics />
-    <main class="max-w-6xl mx-auto pt-2 sm:pt-4 pb-16 px-4 sm:px-8">
+    <main
+      id="swup"
+      class="transition-main max-w-6xl mx-auto pt-2 sm:pt-4 pb-20 px-4 sm:px-8"
+    >
       <slot />
+      <Footer currentSeasonId={currentSeasonId} />
     </main>
   </body>
 </html>

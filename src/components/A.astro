@@ -1,14 +1,15 @@
 ---
 type Props = {
   href: string;
+  class?: string;
 };
 
-const { href } = Astro.props;
+const { href, class: className } = Astro.props;
 const isExternal = href.startsWith("http");
 ---
 
 <a
   href={href}
   {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
-  class="hover:no-underline underline"><slot /></a
+  class:list={[className, "hover:no-underline underline"]}><slot /></a
 >
