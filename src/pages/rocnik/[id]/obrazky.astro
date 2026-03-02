@@ -33,7 +33,7 @@ const imagePublicIds = await getCloudinaryImages({ folder: post.id });
     </a>
     <h1 class="flex flex-col sm:gap-4 gap-1 text-right">
       <span class="font-head sm:text-5xl text-[7vw]">
-        {Number(post.id) - 2022}. ročník
+        {seasonNumber}. ročník
       </span>
       <span class="font-head sm:text-3xl text-[4vw]">
         {post.data.date.toLocaleDateString("cs-CZ")}
