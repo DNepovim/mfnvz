@@ -3,11 +3,15 @@ import Analytics from "@vercel/analytics/astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
+const SITE_TITLE = "Malý festival na velké zahradě";
+
 type Props = {
   currentSeasonId?: string;
+  title?: string;
+  description?: string;
 };
 
-const { currentSeasonId } = Astro.props;
+const { currentSeasonId, title = SITE_TITLE, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,7 +21,10 @@ const { currentSeasonId } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Malý festival na velké zahradě</title>
+    <title>{title}</title>
+    {description && (
+      <meta name="description" content={description} />
+    )}
     <link rel="stylesheet" href="https://use.typekit.net/tai1czq.css" />
   </head>
   <body>

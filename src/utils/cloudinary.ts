@@ -1,4 +1,9 @@
 import cloudinary from "cloudinary";
+import {
+  CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET,
+  PUBLIC_CLOUDINARY_CLOUD_NAME,
+} from "astro:env/client";
 
 type GetCloudinaryImagesOptions = {
   folder: string;
@@ -9,22 +14,12 @@ export const getCloudinaryImages = async ({
   folder,
   showOnlyPromotion,
 }: GetCloudinaryImagesOptions): Promise<string[]> => {
-  const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME as string;
-  const apiKey = import.meta.env.PUBLIC_CLOUDINARY_API_KEY as string | undefined;
-  const apiSecret = import.meta.env.CLOUDINARY_API_SECRET as string | undefined;
-
-  if (!apiKey || !apiSecret) {
-    console.warn(
-      "Cloudinary API credentials not found. Please provide imageIds prop or set PUBLIC_CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET",
-    );
-    return [];
-  }
 
   try {
     cloudinary.v2.config({
-      cloud_name: cloudName,
-      api_key: apiKey,
-      api_secret: apiSecret,
+      cloud_name: PUBLIC_CLOUDINARY_CLOUD_NAME,
+      api_key: CLOUDINARY_API_KEY,
+      api_secret: CLOUDINARY_API_SECRET,
     });
 
     const result = (await cloudinary.v2.search

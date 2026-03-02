@@ -22,15 +22,13 @@ export const envConfig = {
       context: "client",
       access: "public",
     }),
-    PUBLIC_CLOUDINARY_API_KEY: envField.string({
+    CLOUDINARY_API_KEY: envField.string({
       context: "client",
       access: "public",
-      optional: true,
     }),
     CLOUDINARY_API_SECRET: envField.string({
-      context: "server",
+      context: "client",
       access: "public",
-      optional: true,
     }),
   },
 } as const satisfies AstroUserConfig["env"];

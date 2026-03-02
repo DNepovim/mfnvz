@@ -2,9 +2,9 @@
   import { CldImage, configureCloudinary } from "svelte-cloudinary";
   import { cn } from "../utils/cn";
   import Lightbox from "./Lightbox.svelte";
+  import { PUBLIC_CLOUDINARY_CLOUD_NAME } from "astro:env/client";
 
-  const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME as string;
-  configureCloudinary({ cloudName });
+  configureCloudinary({ cloudName: PUBLIC_CLOUDINARY_CLOUD_NAME });
 
   type Props = {
     year: string;
@@ -54,7 +54,9 @@
           isHigher(index, [0, 6, 9, 12, 14]) && "md:row-span-2",
           isHigher(index, [0, 5]) && "max-md:col-span-2",
         )}
-        onclick={() => { openLightbox(index); }}
+        onclick={() => {
+          openLightbox(index);
+        }}
         aria-label="Open image {index + 1} in lightbox"
       >
         <CldImage
@@ -72,7 +74,9 @@
             "size-full max-w-full max-h-full object-cover transition-opacity duration-300",
             loadedThumbnails.has(index) ? "opacity-100" : "opacity-0",
           )}
-          onload={() => { handleThumbnailLoad(index); }}
+          onload={() => {
+            handleThumbnailLoad(index);
+          }}
         />
       </button>
     {/each}
@@ -80,7 +84,7 @@
 
   <Lightbox
     open={lightboxOpen}
-    imagePublicIds={imagePublicIds}
+    {imagePublicIds}
     initialIndex={lightboxIndex}
     onclose={closeLightbox}
   />

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { configureCloudinary, getCldImageUrl } from "svelte-cloudinary";
-  
-const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME as string;
-  configureCloudinary({ cloudName });
+  import { PUBLIC_CLOUDINARY_CLOUD_NAME } from "astro:env/client";
+
+  configureCloudinary({ cloudName: PUBLIC_CLOUDINARY_CLOUD_NAME });
 
   function getFullImageUrl(publicId: string): string {
     return getCldImageUrl({
@@ -182,7 +182,9 @@ const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME as string;
               height={1280}
               loading="eager"
               class="rounded-lg max-w-full max-h-full w-auto h-auto object-contain object-center"
-              onload={() => { handleFullSizeLoad(imageIndex); }}
+              onload={() => {
+                handleFullSizeLoad(imageIndex);
+              }}
             />
           </div>
         {/if}
