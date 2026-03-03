@@ -1,7 +1,6 @@
 ---
 import { CldImage } from "astro-cloudinary";
 import type { CollectionEntry } from "astro:content";
-import { cn } from "@/utils/cn";
 
 type Props = {
   season: CollectionEntry<"seasons">;
@@ -13,21 +12,21 @@ const seasonNumber = Number(season.id) - 2022;
 ---
 
 <a
-  class={cn(
+  class:list={[
     "relative block overflow-hidden group rounded-lg max-w-64",
     isActive ? "grayscale pointer-events-none" : "hover:grayscale-0 transition-[filter] duration-700",
-  )}
+  ]}
   href={`/rocnik/${season.id}`}
 >
   <CldImage
     src={season.data.cover}
     alt={season.id}
-    class={cn(
+    class:list={[
       "w-full rounded-lg origin-top",
       isActive
         ? "scale-118"
         : "group-hover:scale-118 transition-transform duration-700",
-    )}
+    ]}
     sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
     width={264}
     height={176}
@@ -35,12 +34,12 @@ const seasonNumber = Number(season.id) - 2022;
   <p class="flex flex-col ml-2 gap-2 font-head -mt-11 relative">
     <span class="text-3xl text-white">{seasonNumber}. ročník</span>
     <span
-      class={cn(
+      class:list={[
         "text-xl",
         isActive
           ? "text-white"
           : "group-hover:text-white transition-colors duration-700",
-      )}
+      ]}
     >
       {season.data.date.toLocaleDateString("cs-CZ")}
     </span>

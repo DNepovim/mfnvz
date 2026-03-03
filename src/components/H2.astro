@@ -1,7 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
 
-import { cn } from "@/utils/cn";
 type Props = {
   className?: string;
 };
@@ -10,10 +9,10 @@ const { className } = Astro.props;
 ---
 
 <h2
-  class={cn(
+  class:list={[
     "font-head text-4xl items-start mb-6 mt-16 sm:relative flex gap-2",
     className,
-  )}
+  ]}
 >
   <Icon
     name="ph:tree"

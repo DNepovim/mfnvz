@@ -6,6 +6,7 @@ import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import { loadEnv } from "vite";
+import { resolve } from "path";
 import swup, { Theme } from "@swup/astro";
 
 import { envConfig } from "./env.config.ts";
@@ -31,6 +32,11 @@ export default defineConfig({
   vite: {
     // @ts-expect-error vite versions incompatibility
     plugins: [...tailwindcss()],
+    resolve: {
+      alias: {
+        "@": resolve("./src"),
+      },
+    },
   },
 
   prefetch: {

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { CldImage, configureCloudinary } from "svelte-cloudinary";
-  import { cn } from "@/utils/cn";
   import Lightbox from "@/components/Lightbox.svelte";
   import { PUBLIC_CLOUDINARY_CLOUD_NAME } from "astro:env/client";
 
@@ -45,7 +44,7 @@
     {#each imagePublicIds as publicId, index (publicId)}
       <button
         type="button"
-        class={cn(
+        class={[
           "relative rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity max-md:aspect-3/2 text-left p-0 border-0 bg-transparent block w-full",
           index === 0 && "md:col-start-2 md:col-span-2 md:row-span-2",
           index === 1 && "md:col-start-1 md:w-2/3 md:mt-auto md:ml-auto",
@@ -53,7 +52,7 @@
           isHigher(index, [0, 6, 14], 4) && "md:col-span-2 md:row-span-2",
           isHigher(index, [0, 6, 9, 12, 14]) && "md:row-span-2",
           isHigher(index, [0, 5]) && "max-md:col-span-2",
-        )}
+        ]}
         onclick={() => {
           openLightbox(index);
         }}
@@ -70,10 +69,10 @@
           objectFit="cover"
           crop="auto"
           placeholder="blur"
-          class={cn(
+          class={[
             "size-full max-w-full max-h-full object-cover transition-opacity duration-300",
             loadedThumbnails.has(index) ? "opacity-100" : "opacity-0",
-          )}
+          ]}
           onload={() => {
             handleThumbnailLoad(index);
           }}
