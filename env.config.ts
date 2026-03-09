@@ -30,5 +30,10 @@ export const envConfig = {
       context: "client",
       access: "public",
     }),
+    UMAMI_SITE_ID: envField.string({
+      context: "client",
+      access: "public",
+      optional: true
+    })
   },
 } as const satisfies AstroUserConfig["env"];
