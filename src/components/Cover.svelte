@@ -18,69 +18,56 @@
 
   const alt = $derived(subtitle ? `${title} ${subtitle}` : title);
 
-  let imageElement: HTMLImageElement;
-  let imageBottomDistance = $state<number | null>(null);
-  let initialImageBottom = $state<number | null>(null);
+  let scrollY = $state(0);
+  let viewportHeight = $state(0);
 
   const maxBlur = 20;
-  const threshold = 50;
+  const minThreshold = 50;
 
-  const opacity = $derived(() => {
-    if (imageBottomDistance === null || initialImageBottom === null) return 1;
-    if (imageBottomDistance >= initialImageBottom) return 1;
-    if (imageBottomDistance <= threshold) return 0;
-    return (imageBottomDistance - threshold) / (initialImageBottom - threshold);
-  });
+  // Blur starts when scrolled past 1/3 of viewport, fully blurred at 2/3
+  const blurStart = $derived(viewportHeight / 3);
+  const blurEnd = $derived(viewportHeight * 2 / 3);
 
   const blur = $derived(() => {
-    if (imageBottomDistance === null || initialImageBottom === null) return 0;
-    if (imageBottomDistance >= initialImageBottom) return 0;
-    if (imageBottomDistance <= threshold) return maxBlur;
-    return (1 - (imageBottomDistance - threshold) / (initialImageBottom - threshold)) * maxBlur;
+    if (scrollY <= blurStart) return 0;
+    if (scrollY >= blurEnd) return maxBlur;
+    return ((scrollY - blurStart) / (blurEnd - blurStart)) * maxBlur;
+  });
+
+  const opacity = $derived(() => {
+    if (scrollY <= blurStart) return 1;
+    if (scrollY >= blurEnd - minThreshold) return 0;
+    return 1 - (scrollY - blurStart) / (blurEnd - minThreshold - blurStart);
   });
 
   const titleColor = $derived(() => {
-    if (imageBottomDistance === null || initialImageBottom === null) return "rgb(255, 255, 255)";
-    const midpoint = (initialImageBottom + threshold) / 2;
-    if (imageBottomDistance >= midpoint) return "rgb(255, 255, 255)";
+    const midpoint = (blurStart + blurEnd) / 2;
+    if (scrollY <= midpoint) return "rgb(255, 255, 255)";
     return "rgb(0, 0, 0)";
   });
 
-  function updateImagePosition() {
-    const rect = imageElement.getBoundingClientRect();
-    imageBottomDistance = rect.bottom;
-    initialImageBottom ??= rect.bottom;
-  }
-
   $effect(() => {
+    viewportHeight = window.innerHeight;
+
     function handleScroll() {
-      updateImagePosition();
+      scrollY = window.scrollY;
     }
 
     function handleResize() {
-      updateImagePosition();
+      viewportHeight = window.innerHeight;
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize, { passive: true });
-
-    window.requestAnimationFrame(() => {
-      updateImagePosition();
-    });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
   });
-
-  $effect(() => {
-    updateImagePosition();
-  });
 </script>
 
 <img
-  bind:this={imageElement}
   src={imageUrl}
   alt={alt}
   class="w-full h-full rounded-lg"
