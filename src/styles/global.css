@@ -1,11 +1,8 @@
 @import "tailwindcss";
+@plugin "tailwindcss-motion";
 
 @theme {
   --font-head: "liebedoni-outline", "serif";
   --font-head-solid: "liebedoni-solid", "serif";
   --font-text: "open-sans", "serif";
-}
-
-html {
-  font-family: var(--font-text), sans-serif;
 }
