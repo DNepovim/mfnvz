@@ -4,7 +4,8 @@ import { glob } from "astro/loaders";
 const seasons = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./src/content/seasons" }),
   schema: z.object({
-    date: z.date(),
+    startDate: z.date(),
+    endDate: z.date(),
     door: z.date(),
     fbEventLink: z.string().optional(),
     cover: z.string(),

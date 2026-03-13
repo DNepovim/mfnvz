@@ -1,6 +1,7 @@
 import type {
   MusicEvent,
   MusicGroup,
+  Offer,
   Person,
   Place,
   PostalAddress,
@@ -29,6 +30,13 @@ type OrganizerArgs = {
   url: URL;
 };
 
+type OfferArgs = {
+  price: number;
+  priceCurrency: string;
+  name: string;
+  description?: string;
+};
+
 export const buildPostalAddressSchema = (
   args: PostalAddressArgs,
 ): PostalAddress => ({
@@ -54,6 +62,12 @@ export const buildOrganizerSchema = (args: OrganizerArgs): Person => ({
   email: args.email,
 });
 
+export const buildOfferSchema = (args: OfferArgs): Offer => ({
+  "@type": "Offer",
+  ...args,
+  availability: "https://schema.org/InStock",
+});
+
 export const buildMusicGroupSchema = (band: Band): MusicGroup => ({
   "@type": "MusicGroup",
   ...band,
@@ -69,7 +83,8 @@ export const buildMusicEventSchema = (
   "@context": "https://schema.org",
   "@type": "MusicEvent",
   name: `${String(seasonNumber)}. ročník Malého festivalu na velké zahradě`,
-  startDate: post.data.date.toISOString(),
+  startDate: post.data.startDate.toISOString(),
+  endDate: post.data.endDate.toISOString(),
   ...{ doorTime: post.data.door.toISOString() },
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
@@ -87,6 +102,13 @@ export const buildMusicEventSchema = (
   ...(post.data.claim && { description: post.data.claim }),
   ...(post.data.bands && {
     performer: post.data.bands.map(buildMusicGroupSchema),
+  }),
+  offers: buildOfferSchema({
+    name: "Vstupné dobrovolné",
+    price: 0,
+    priceCurrency: "CZK",
+    description:
+      "Vstupné, stravné a ubytné… dobrovolné. Máte moc? Dejte moc. Máte málo? Dejte málo. Nemáte nic? Nedávejte nic. Tak jednoduché to je.",
   }),
   ...(post.data.fbEventLink && { sameAs: post.data.fbEventLink }),
   organizer: buildOrganizerSchema({
