@@ -1,4 +1,6 @@
 ---
+import { toOgImageUrl } from "@/utils/cloudinary";
+
 const SITE_NAME = "Malý festival na velké zahradě";
 
 type Props = {
@@ -8,7 +10,8 @@ type Props = {
   url: string;
 };
 
-const { title, description, image, url } = Astro.props;
+const { title, description, url } = Astro.props;
+const ogImage = Astro.props.image ? toOgImageUrl(Astro.props.image) : undefined;
 ---
 
 <title>{title}</title>
@@ -19,8 +22,8 @@ const { title, description, image, url } = Astro.props;
 <meta property="og:url" content={url} />
 <meta property="og:locale" content="cs_CZ" />
 {description && <meta property="og:description" content={description} />}
-{image && <meta property="og:image" content={image} />}
-<meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+{ogImage && <meta property="og:image" content={ogImage} />}
+<meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
 <meta name="twitter:title" content={title} />
 {description && <meta name="twitter:description" content={description} />}
-{image && <meta name="twitter:image" content={image} />}
+{ogImage && <meta name="twitter:image" content={ogImage} />}

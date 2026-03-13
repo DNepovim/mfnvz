@@ -10,6 +10,9 @@ type GetCloudinaryImagesOptions = {
   showOnlyPromotion?: boolean;
 };
 
+export const toOgImageUrl = (url: string): string =>
+  url.replace("/upload/", "/upload/c_fill,w_1200,h_630/");
+
 export const getCloudinaryImages = async ({
   folder,
   showOnlyPromotion,
