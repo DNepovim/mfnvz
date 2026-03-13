@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { buildMusicEventSchema } from "@/utils/schema";
+
+type Props = {
+  post: CollectionEntry<"seasons">;
+  url: URL;
+};
+
+const { post, url } = Astro.props;
+
+const seasonNumber = Number(post.id) - 2022;
+
+const schema = buildMusicEventSchema(post, seasonNumber, url);
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
