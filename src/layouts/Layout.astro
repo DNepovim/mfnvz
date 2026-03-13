@@ -33,13 +33,11 @@ const config = {
     <link rel="stylesheet" href="https://use.typekit.net/tai1czq.css" />
     <script is:inline defer src={config.url} data-website-id={config.websiteId}
     ></script>
+    <slot name="head" />
   </head>
   <body>
     <Analytics />
-    <main
-      id="swup"
-      class="max-w-6xl mx-auto pt-2 sm:pt-4 pb-20 px-1 sm:px-8"
-    >
+    <main id="swup" class="max-w-6xl mx-auto pt-2 sm:pt-4 pb-20 px-1 sm:px-8">
       <slot />
       <Footer currentSeasonId={currentSeasonId} />
     </main>

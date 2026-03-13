@@ -1,4 +1,3 @@
-// @ts-check
 import eslint from "@eslint/js";
 import eslintPluginAstro from "eslint-plugin-astro";
 import sonarjs from "eslint-plugin-sonarjs";
