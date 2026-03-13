@@ -1,8 +1,8 @@
-import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
+import { defineCollection, z } from 'astro:content'
+import { glob } from 'astro/loaders'
 
 const seasons = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content/seasons" }),
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/seasons' }),
   schema: z.object({
     startDate: z.date(),
     endDate: z.date(),
@@ -21,15 +21,14 @@ const seasons = defineCollection({
           logo: z.string().optional(),
           email: z.string().email().optional(),
           member: z
-            .array(
-              z.object({ name: z.string(), jobTitle: z.string().optional() }),
-            )
+            .array(z.object({ name: z.string(), jobTitle: z.string().optional() }))
             .optional(),
         }),
       )
       .optional(),
     images: z.array(z.string()).optional(),
+    schedule: z.array(z.object({ name: z.string(), startDate: z.date() })).optional(),
   }),
-});
+})
 
-export const collections = { seasons };
+export const collections = { seasons }

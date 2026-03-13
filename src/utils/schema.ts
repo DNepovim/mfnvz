@@ -1,4 +1,6 @@
+import type { CollectionEntry } from 'astro:content'
 import type {
+  Event,
   MusicEvent,
   MusicGroup,
   Offer,
@@ -6,96 +8,100 @@ import type {
   Place,
   PostalAddress,
   WithContext,
-} from "schema-dts";
-import type { CollectionEntry } from "astro:content";
+} from 'schema-dts'
 
-type Band = NonNullable<CollectionEntry<"seasons">["data"]["bands"]>[number];
-type Member = NonNullable<Band["member"]>[number];
+type Band = NonNullable<CollectionEntry<'seasons'>['data']['bands']>[number]
+type Member = NonNullable<Band['member']>[number]
+type ScheduleItem = NonNullable<CollectionEntry<'seasons'>['data']['schedule']>[number]
 
 type PostalAddressArgs = {
-  streetAddress: string;
-  addressLocality: string;
-  postalCode: string;
-  addressCountry: string;
-};
+  streetAddress: string
+  addressLocality: string
+  postalCode: string
+  addressCountry: string
+}
 
 type PlaceArgs = {
-  name: string;
-  address: PostalAddressArgs;
-};
+  name: string
+  address: PostalAddressArgs
+}
 
 type OrganizerArgs = {
-  name: string;
-  email: string;
-  url: URL;
-};
+  name: string
+  email: string
+  url: URL
+}
 
 type OfferArgs = {
-  price: number;
-  priceCurrency: string;
-  name: string;
-  description?: string;
-};
+  price: number
+  priceCurrency: string
+  name: string
+  description?: string
+}
 
-export const buildPostalAddressSchema = (
-  args: PostalAddressArgs,
-): PostalAddress => ({
-  "@type": "PostalAddress",
+export const buildPostalAddressSchema = (args: PostalAddressArgs): PostalAddress => ({
+  '@type': 'PostalAddress',
   ...args,
-});
+})
 
 export const buildPlaceSchema = (args: PlaceArgs): Place => ({
-  "@type": "Place",
+  '@type': 'Place',
   name: args.name,
   address: buildPostalAddressSchema(args.address),
-});
+})
 
 export const buildPersonSchema = (member: Member): Person => ({
-  "@type": "Person",
+  '@type': 'Person',
   ...member,
-});
+})
 
 export const buildOrganizerSchema = (args: OrganizerArgs): Person => ({
-  "@type": "Person",
+  '@type': 'Person',
   name: args.name,
-  url: new URL("/", args.url).href,
+  url: new URL('/', args.url).href,
   email: args.email,
-});
+})
 
 export const buildOfferSchema = (args: OfferArgs): Offer => ({
-  "@type": "Offer",
+  '@type': 'Offer',
   ...args,
-  availability: "https://schema.org/InStock",
-});
+  availability: 'https://schema.org/InStock',
+})
+
+export const buildSubEventSchema = (item: ScheduleItem): Event => ({
+  '@type': 'Event',
+  name: item.name,
+  startDate: item.startDate.toISOString(),
+})
 
 export const buildMusicGroupSchema = (band: Band): MusicGroup => ({
-  "@type": "MusicGroup",
+  '@type': 'MusicGroup',
   ...band,
   foundingDate: band.foundingDate?.toISOString(),
   member: (band.member ?? []).map(buildPersonSchema),
-});
+})
 
 export const buildMusicEventSchema = (
-  post: CollectionEntry<"seasons">,
+  post: CollectionEntry<'seasons'>,
   seasonNumber: number,
   url: URL,
 ): WithContext<MusicEvent> => ({
-  "@context": "https://schema.org",
-  "@type": "MusicEvent",
+  '@context': 'https://schema.org',
+  '@type': 'MusicEvent',
   name: `${String(seasonNumber)}. ročník Malého festivalu na velké zahradě`,
   startDate: post.data.startDate.toISOString(),
   endDate: post.data.endDate.toISOString(),
   ...{ doorTime: post.data.door.toISOString() },
-  eventStatus: "https://schema.org/EventScheduled",
-  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   url: url.href,
   location: buildPlaceSchema({
-    name: "Velká zahrada v Řevnicích",
+    name: 'Velká zahrada v Řevnicích',
     address: {
-      streetAddress: "Žižkova 257",
-      addressLocality: "Řevnice",
-      postalCode: "25230",
-      addressCountry: "CZ",
+      streetAddress: 'Žižkova 257',
+      addressLocality: 'Řevnice',
+      postalCode: '25230',
+      addressCountry: 'CZ',
     },
   }),
   image: post.data.images,
@@ -104,16 +110,19 @@ export const buildMusicEventSchema = (
     performer: post.data.bands.map(buildMusicGroupSchema),
   }),
   offers: buildOfferSchema({
-    name: "Vstupné dobrovolné",
+    name: 'Vstupné dobrovolné',
     price: 0,
-    priceCurrency: "CZK",
+    priceCurrency: 'CZK',
     description:
-      "Vstupné, stravné a ubytné… dobrovolné. Máte moc? Dejte moc. Máte málo? Dejte málo. Nemáte nic? Nedávejte nic. Tak jednoduché to je.",
+      'Vstupné, stravné a ubytné… dobrovolné. Máte moc? Dejte moc. Máte málo? Dejte málo. Nemáte nic? Nedávejte nic. Tak jednoduché to je.',
+  }),
+  ...(post.data.schedule && {
+    subEvent: post.data.schedule.map(buildSubEventSchema),
   }),
   ...(post.data.fbEventLink && { sameAs: post.data.fbEventLink }),
   organizer: buildOrganizerSchema({
-    name: "Dominik Bláha",
-    email: "principal@mfnvz.cz",
+    name: 'Dominik Bláha',
+    email: 'principal@mfnvz.cz',
     url,
   }),
-});
+})
