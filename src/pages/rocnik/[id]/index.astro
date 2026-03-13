@@ -57,7 +57,7 @@ const imagePublicIds = await getCloudinaryImages({
     client:load
     image={post.data.cover}
     title={`${String(seasonNumber)}. ročník`}
-    subtitle={post.data.date.toLocaleDateString("cs-CZ")}
+    subtitle={post.data.startDate.toLocaleDateString("cs-CZ")}
   />
   {post.data.bands && <BandsLine bands={post.data.bands} />}
 

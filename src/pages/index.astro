@@ -33,7 +33,7 @@ const imagePublicIds = await getCloudinaryImages({ folder: post.id });
     image={post.data.cover}
     title="Malý festival"
     subtitle="na velké zahradě"
-    subsubtitle={`${post.data.date.toLocaleDateString("cs-CZ")}, 17:00, Řevnice`}
+    subsubtitle={`${post.data.startDate.toLocaleDateString("cs-CZ")}, 17:00, Řevnice`}
   />
   {post.data.bands && <BandsLine bands={post.data.bands} />}
 
