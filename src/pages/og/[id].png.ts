@@ -3,7 +3,10 @@ import { ImageResponse } from '@vercel/og'
 
 export async function getStaticPaths() {
   const posts = await getCollection('seasons')
-  const sorted = [...posts].sort((a, b) => a.id.localeCompare(b.id))
+  const now = new Date()
+  const sorted = [...posts]
+    .sort((a, b) => a.id.localeCompare(b.id))
+    .filter((post) => post.data.startDate <= now)
   return sorted.map((post, index) => ({
     params: { id: post.id },
     props: { post, seasonNumber: index + 1 },
