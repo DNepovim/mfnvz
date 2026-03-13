@@ -72,6 +72,7 @@ export const buildSubEventSchema = (item: ScheduleItem): Event => ({
   '@type': 'Event',
   name: item.name,
   startDate: item.startDate.toISOString(),
+  location: item.location,
 })
 
 export const buildMusicGroupSchema = (band: Band): MusicGroup => ({
