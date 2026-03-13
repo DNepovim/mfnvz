@@ -1,19 +1,19 @@
 ---
 type Props = {
-  bands: string[];
-};
+  bands: { name: string }[]
+}
 
-const { bands } = Astro.props;
+const { bands } = Astro.props
 ---
 
 <p
-  class="text-md max-sm:flex-wrap mt-8 sm:text-2xl font-thin px-4 gap-4 flex items-center mb-8"
+  class="text-md mt-8 mb-8 flex items-center gap-4 px-4 font-thin max-sm:flex-wrap sm:text-2xl"
 >
   {
-    bands.map((b, i) => (
+    bands.map(({ name }, i) => (
       <>
-        <span class="whitespace-nowrap">{b}</span>
-        {i < bands.length - 1 && <span class="flex-1 bg-gray-700 h-[0.5px]" />}
+        <span class="whitespace-nowrap">{name}</span>
+        {i < bands.length - 1 && <span class="h-[0.5px] flex-1 bg-gray-700" />}
       </>
     ))
   }
