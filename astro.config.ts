@@ -21,7 +21,10 @@ export default defineConfig({
   site: SITE_URL ?? "http://localhost:4321",
   integrations: [
     mdx(),
-    sitemap({ lastmod: new Date() }),
+    sitemap({
+      lastmod: new Date(),
+      filter: (page) => !page.includes('/obrazky'),
+    }),
     svelte(),
     icon(),
     swup({
