@@ -1,5 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content'
 import { ImageResponse } from '@vercel/og'
+import sharp from 'sharp'
 
 export async function getStaticPaths() {
   const posts = await getCollection('seasons')
@@ -160,12 +161,18 @@ export async function GET({ props }: { props: Props }) {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return new ImageResponse(element as any, {
+  const png = await new ImageResponse(element as any, {
     width: 1200,
     height: 630,
     fonts: [
       { name: 'liebedoni-outline', data: liebedoniData!, style: 'normal', weight: 400 },
       { name: 'open-sans', data: openSansData!, style: 'normal', weight: 300 },
     ],
+  }).arrayBuffer()
+
+  const jpeg = await sharp(Buffer.from(png)).jpeg({ quality: 85 }).toBuffer()
+
+  return new Response(jpeg, {
+    headers: { 'Content-Type': 'image/jpeg' },
   })
 }
