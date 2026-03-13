@@ -1,6 +1,4 @@
 ---
-import { toOgImageUrl } from "@/utils/cloudinary";
-
 const SITE_NAME = "Malý festival na velké zahradě";
 
 type Props = {
@@ -11,7 +9,7 @@ type Props = {
 };
 
 const { title, description, url } = Astro.props;
-const ogImage = Astro.props.image ? toOgImageUrl(Astro.props.image) : undefined;
+const ogImage = Astro.props.image ? new URL(Astro.props.image, url).href : undefined;
 ---
 
 <title>{title}</title>

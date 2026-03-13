@@ -40,7 +40,7 @@ const imagePublicIds = await getCloudinaryImages({
 <Layout
   title={`${String(seasonNumber)}. ročník ${post.id}`}
   description={post.data.claim}
-  image={post.data.cover}
+  image={`/og/${post.id}.png`}
   currentSeasonId={post.id}
 >
   <MusicEventSchema slot="head" post={post} seasonNumber={seasonNumber} url={Astro.url} />
