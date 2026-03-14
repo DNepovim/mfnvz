@@ -52,10 +52,10 @@ const extractOpentypeUrl = (css: string, family: string, weight: number): string
   )
 }
 
-let liebedoniCache: ArrayBuffer | null = null
-let openSansCache: ArrayBuffer | null = null
+let liebedoniCache: ArrayBuffer | undefined
+let openSansCache: ArrayBuffer | undefined
 
-const loadLiebedoni = async () => {
+const loadLiebedoni = async (): Promise<ArrayBuffer> => {
   if (liebedoniCache) return liebedoniCache
   const css = await loadTypekitCss()
   const url = extractOpentypeUrl(css ?? '', 'liebedoni-outline', 400)
@@ -63,7 +63,7 @@ const loadLiebedoni = async () => {
   return liebedoniCache
 }
 
-const loadOpenSans = async () => {
+const loadOpenSans = async (): Promise<ArrayBuffer> => {
   if (openSansCache) return openSansCache
   const css = await loadTypekitCss()
   const url = extractOpentypeUrl(css ?? '', 'open-sans', 300)
@@ -165,8 +165,8 @@ export async function GET({ props }: { props: Props }) {
     width: 1200,
     height: 630,
     fonts: [
-      { name: 'liebedoni-outline', data: liebedoniData!, style: 'normal', weight: 400 },
-      { name: 'open-sans', data: openSansData!, style: 'normal', weight: 300 },
+      { name: 'liebedoni-outline', data: liebedoniData, style: 'normal', weight: 400 },
+      { name: 'open-sans', data: openSansData, style: 'normal', weight: 300 },
     ],
   }).arrayBuffer()
 

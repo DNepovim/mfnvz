@@ -94,6 +94,10 @@ export default defineConfig(
       },
     },
   },
+  {
+    files: ["**/*.astro", "**/*.astro/*.ts"],
+    ...tseslint.configs.disableTypeChecked,
+  },
   ...eslintSveltePlugin.configs.recommended,
   {
     files: ["**/*.svelte"],

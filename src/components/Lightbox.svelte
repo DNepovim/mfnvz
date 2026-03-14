@@ -78,12 +78,12 @@
     }
 
     document.addEventListener("gallery:open", handleOpen);
-    return () => document.removeEventListener("gallery:open", handleOpen);
+    return () => { document.removeEventListener("gallery:open", handleOpen); };
   });
 
   $effect(() => {
     window.addEventListener("keydown", handleKeydown);
-    return () => window.removeEventListener("keydown", handleKeydown);
+    return () => { window.removeEventListener("keydown", handleKeydown); };
   });
 
   $effect(() => {
