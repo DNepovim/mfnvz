@@ -50,6 +50,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      narrowland:
+        specifier: ^1.5.0
+        version: 1.5.0
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -4180,6 +4183,9 @@ packages:
     resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  narrowland@1.5.0:
+    resolution: {integrity: sha512-ro9bCOv/2VVQ8CwVJZVPVhxJebe3ftKSCEXZb38Ua3II1AEKGeHtbegZf46Adj4XyE/OL5cwirPq2gL7UmTlJw==}
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -10751,6 +10757,8 @@ snapshots:
       thenify-all: 1.6.0
 
   nanoid@3.3.11: {}
+
+  narrowland@1.5.0: {}
 
   natural-compare@1.4.0: {}
 

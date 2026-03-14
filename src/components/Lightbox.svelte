@@ -20,17 +20,20 @@
   }
 
   type Props = {
-    open: boolean;
     imagePublicIds: string[];
-    initialIndex: number;
-    onclose: () => void;
+    galleryId: string;
   };
 
-  const { open, imagePublicIds, initialIndex, onclose }: Props = $props();
+  const { imagePublicIds, galleryId }: Props = $props();
 
+  let open = $state(false);
   let currentIndex = $state(0);
   let loadedFullSize = $state<Set<number>>(new Set());
   let pointerStartX = $state<number | null>(null);
+
+  function close() {
+    open = false;
+  }
 
   function goPrev() {
     currentIndex =
@@ -46,13 +49,9 @@
     loadedFullSize = new Set([...loadedFullSize, index]);
   }
 
-  function handleBackdropClick() {
-    onclose();
-  }
-
   function handleKeydown(e: KeyboardEvent) {
     if (!open) return;
-    if (e.key === "Escape") onclose();
+    if (e.key === "Escape") close();
     if (e.key === "ArrowLeft") goPrev();
     if (e.key === "ArrowRight") goNext();
   }
@@ -71,15 +70,20 @@
   }
 
   $effect(() => {
-    if (open) currentIndex = initialIndex;
+    function handleOpen(e: Event) {
+      const { index, galleryId: id } = (e as CustomEvent).detail;
+      if (id !== galleryId) return;
+      currentIndex = index;
+      open = true;
+    }
+
+    document.addEventListener("gallery:open", handleOpen);
+    return () => document.removeEventListener("gallery:open", handleOpen);
   });
 
   $effect(() => {
-    const fn = handleKeydown;
-    window.addEventListener("keydown", fn);
-    return () => {
-      window.removeEventListener("keydown", fn);
-    };
+    window.addEventListener("keydown", handleKeydown);
+    return () => window.removeEventListener("keydown", handleKeydown);
   });
 
   $effect(() => {
@@ -112,13 +116,13 @@
     <div
       class="absolute inset-0 z-0 cursor-pointer"
       aria-hidden="true"
-      onclick={handleBackdropClick}
+      onclick={close}
     ></div>
     <button
       type="button"
-      class="absolute top-4 right-4 z-10 p-2 bg-transparent border-none text-black cursor-pointer rounded flex items-center justify-center hover:bg-black/[0.06]"
+      class="absolute top-4 right-4 z-10 p-2 bg-transparent border-none text-black cursor-pointer rounded flex items-center justify-center hover:bg-black/6"
       aria-label="Close"
-      onclick={onclose}
+      onclick={close}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +142,7 @@
 
     <button
       type="button"
-      class="shrink-0 w-12 text-black bg-transparent border-none cursor-pointer flex items-center justify-center p-4 hover:bg-black/[0.06] relative mr-2 z-[1]"
+      class="shrink-0 w-12 text-black bg-transparent border-none cursor-pointer flex items-center justify-center p-4 hover:bg-black/6 relative mr-2 z-1"
       aria-label="Previous image"
       onclick={goPrev}
     >
@@ -157,8 +161,8 @@
       </svg>
     </button>
 
-    <div
-      class="flex-1 min-w-0 h-full flex items-center justify-center p-8 box-border relative z-[1]"
+    <button
+      class="flex-1 min-w-0 h-full flex items-center justify-center p-8 box-border relative z-1"
       onpointerdown={handlePointerDown}
       onpointerup={handlePointerUp}
       onpointerleave={() => {
@@ -189,11 +193,11 @@
           </div>
         {/if}
       </div>
-    </div>
+    </button>
 
     <button
       type="button"
-      class="shrink-0 w-12 text-black bg-transparent border-none cursor-pointer flex items-center justify-center p-4 hover:bg-black/[0.06] relative ml-2 z-[1]"
+      class="shrink-0 w-12 text-black bg-transparent border-none cursor-pointer flex items-center justify-center p-4 hover:bg-black/6 relative ml-2 z-1"
       aria-label="Next image"
       onclick={goNext}
     >

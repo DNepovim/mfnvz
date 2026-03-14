@@ -39,43 +39,43 @@ type OfferArgs = {
   description?: string
 }
 
-export const buildPostalAddressSchema = (args: PostalAddressArgs): PostalAddress => ({
+const buildPostalAddressSchema = (args: PostalAddressArgs): PostalAddress => ({
   '@type': 'PostalAddress',
   ...args,
 })
 
-export const buildPlaceSchema = (args: PlaceArgs): Place => ({
+const buildPlaceSchema = (args: PlaceArgs): Place => ({
   '@type': 'Place',
   name: args.name,
   address: buildPostalAddressSchema(args.address),
 })
 
-export const buildPersonSchema = (member: Member): Person => ({
+const buildPersonSchema = (member: Member): Person => ({
   '@type': 'Person',
   ...member,
 })
 
-export const buildOrganizerSchema = (args: OrganizerArgs): Person => ({
+const buildOrganizerSchema = (args: OrganizerArgs): Person => ({
   '@type': 'Person',
   name: args.name,
   url: new URL('/', args.url).href,
   email: args.email,
 })
 
-export const buildOfferSchema = (args: OfferArgs): Offer => ({
+const buildOfferSchema = (args: OfferArgs): Offer => ({
   '@type': 'Offer',
   ...args,
   availability: 'https://schema.org/InStock',
 })
 
-export const buildSubEventSchema = (item: ScheduleItem): Event => ({
+const buildSubEventSchema = (item: ScheduleItem): Event => ({
   '@type': 'Event',
   name: item.name,
   startDate: item.startDate.toISOString(),
   location: item.location,
 })
 
-export const buildMusicGroupSchema = (band: Band): MusicGroup => ({
+const buildMusicGroupSchema = (band: Band): MusicGroup => ({
   '@type': 'MusicGroup',
   ...band,
   foundingDate: band.foundingDate?.toISOString(),

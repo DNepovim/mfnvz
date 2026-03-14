@@ -1,45 +1,49 @@
 ---
-import Cover from "@/components/Cover.svelte";
-import Seasons from "@/components/Seasons.astro";
-import { getEntry, render } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
-import H2 from "@/components/H2.astro";
-import H3 from "@/components/H3.astro";
-import P from "@/components/P.astro";
-import Gallery from "@/components/Gallery.svelte";
-import BandsLine from "@/components/BandsLine.astro";
-import Img from "@/components/Img.astro";
-import Ul from "@/components/Ul.astro";
-import A from "@/components/A.astro";
-import Hr from "@/components/Hr.astro";
-import Claim from "@/components/Claim.astro";
-import MusicEventSchema from "@/components/MusicEventSchema.astro";
-import { getCloudinaryImages } from "@/utils/cloudinary";
+import { getCollection, getEntry, render, type DataEntryMap } from 'astro:content'
 
-const post = await getEntry("seasons", "2026");
+import A from '@/components/A.astro'
+import BandsLine from '@/components/BandsLine.astro'
+import Claim from '@/components/Claim.astro'
+import Cover from '@/components/Cover.svelte'
+import Gallery from '@/components/Gallery.astro'
+import H2 from '@/components/H2.astro'
+import H3 from '@/components/H3.astro'
+import Hr from '@/components/Hr.astro'
+import Img from '@/components/Img.astro'
+import MusicEventSchema from '@/components/MusicEventSchema.astro'
+import P from '@/components/P.astro'
+import Seasons from '@/components/Seasons.astro'
+import Ul from '@/components/Ul.astro'
+import Layout from '@/layouts/Layout.astro'
+
+const post = await getEntry('seasons', '2026')
 
 if (!post) {
-  return;
+  return
 }
 
-const { Content } = await render(post);
-const imagePublicIds = await getCloudinaryImages({ folder: post.id });
+
+const { Content } = await render(post)
 ---
 
-<Layout currentSeasonId={post.id} description={post.data.claim} image={`/og/${post.id}.jpg`}>
+<Layout
+  currentSeasonId={post.id}
+  description={post.data.claim}
+  image={`/og/${post.id}.jpg`}
+>
   <MusicEventSchema slot="head" post={post} url={Astro.url} />
   <Cover
     client:load
     image={post.data.cover}
     title="Malý festival"
     subtitle="na velké zahradě"
-    subsubtitle={`${post.data.startDate.toLocaleDateString("cs-CZ")}, 17:00, Řevnice`}
+    subsubtitle={`${post.data.startDate.toLocaleDateString('cs-CZ')}, 17:00, Řevnice`}
   />
   {post.data.bands && <BandsLine bands={post.data.bands} />}
 
   <Claim claim={post.data.claim} />
 
-  <div class="max-w-xl mx-auto px-4">
+  <div class="mx-auto max-w-xl px-4">
     <Seasons />
     <Content
       components={{
@@ -54,5 +58,5 @@ const imagePublicIds = await getCloudinaryImages({ folder: post.id });
     />
   </div>
 
-  <Gallery client:visible year={post.id} imagePublicIds={imagePublicIds} />
+  <Gallery year={post.id} />
 </Layout>

@@ -12,8 +12,5 @@ export default {
     ],
     project: ['src/**/*'],
   },
-  ignore: ["svelte.config.js"],
-  ignoreDependencies: [
-    '@iconify-json/ph',
-  ],
+  ignoreDependencies: ['@iconify-json/ph', 'eslint-plugin-jsx-a11y'],
 } satisfies KnipConfig
