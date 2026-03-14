@@ -4,7 +4,7 @@ import { getEntry, render } from 'astro:content'
 import A from '@/components/A.astro'
 import BandsLine from '@/components/BandsLine.astro'
 import Claim from '@/components/Claim.astro'
-import Cover from '@/components/Cover.svelte'
+import Cover from '@/components/Cover.astro'
 import Gallery from '@/components/Gallery.astro'
 import H2 from '@/components/H2.astro'
 import H3 from '@/components/H3.astro'
@@ -33,7 +33,6 @@ const { Content } = await render(post)
 >
   <MusicEventSchema slot="head" post={post} url={Astro.url} />
   <Cover
-    client:load
     image={post.data.cover}
     title="Malý festival"
     subtitle="na velké zahradě"

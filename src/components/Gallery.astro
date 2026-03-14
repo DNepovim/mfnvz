@@ -19,7 +19,7 @@ const isHigher = (index: number, pattern: number[], start = 0): boolean =>
 
 const images = await getCollection(
   `gallery${year as '2024'}`,
-   (i) => !isPromotion || isOneOf('promotion', (i.data.tags ?? []).filter(isDefined)),
+  (i) => !isPromotion || isOneOf('promotion', (i.data.tags ?? []).filter(isDefined)),
 )
 ---
 
@@ -49,6 +49,7 @@ const images = await getCollection(
               width={800}
               height={533}
               class="size-full max-h-full max-w-full object-cover"
+              flags={['progressive']}
             />
           </button>
         ))}

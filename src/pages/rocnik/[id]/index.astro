@@ -4,7 +4,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content'
 import A from '@/components/A.astro'
 import BandsLine from '@/components/BandsLine.astro'
 import Claim from '@/components/Claim.astro'
-import Cover from '@/components/Cover.svelte'
+import Cover from '@/components/Cover.astro'
 import Gallery from '@/components/Gallery.astro'
 import H2 from '@/components/H2.astro'
 import H3 from '@/components/H3.astro'
@@ -51,7 +51,6 @@ const { Content } = await render(post)
     <menu><li></li></menu>
   </header>
   <Cover
-    client:load
     image={post.data.cover}
     title={`${String(seasonNumber)}. ročník`}
     subtitle={post.data.startDate.toLocaleDateString('cs-CZ')}
