@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content'
 import { CldImage } from 'astro-cloudinary'
 import { isDefined, isOneOf } from 'narrowland'
 
-import Lightbox from '@/components/Lightbox.svelte'
+import Lightbox from '@/components/Lightbox.astro'
 
 type Props = {
   year: string
@@ -54,11 +54,7 @@ const images = await getCollection(
           </button>
         ))}
       </div>
-      <Lightbox
-        client:visible
-        imagePublicIds={images.map(({ data }) => data.public_id)}
-        {galleryId}
-      />
+      <Lightbox imagePublicUrls={images.map(({ data }) => data.url)} {galleryId} />
     </>
   )
 }

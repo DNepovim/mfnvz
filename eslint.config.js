@@ -1,10 +1,8 @@
 import eslint from "@eslint/js";
 import eslintPluginAstro from "eslint-plugin-astro";
 import sonarjs from "eslint-plugin-sonarjs";
-import eslintSveltePlugin from "eslint-plugin-svelte";
 import unusedImports from "eslint-plugin-unused-imports";
 import { defineConfig, globalIgnores } from "eslint/config";
-import svelteParser from "svelte-eslint-parser";
 import tseslint from "typescript-eslint";
 
 export default defineConfig(
@@ -97,25 +95,5 @@ export default defineConfig(
   {
     files: ["**/*.astro", "**/*.astro/*.ts"],
     ...tseslint.configs.disableTypeChecked,
-  },
-  ...eslintSveltePlugin.configs.recommended,
-  {
-    files: ["**/*.svelte"],
-    languageOptions: {
-      parser: svelteParser,
-      parserOptions: {
-        parser: tseslint.parser,
-        project: true,
-        tsconfigRootDir: import.meta.dirname,
-        extraFileExtensions: [".svelte"],
-      },
-    },
-    rules: {
-      "sonarjs/no-empty-collection": "off",
-      "sonarjs/no-duplicate-string": "off",
-      "sonarjs/no-small-switch": "off",
-      "sonarjs/no-identical-functions": "off",
-      "@typescript-eslint/no-unsafe-assignment": "off",
-    },
   },
 );
