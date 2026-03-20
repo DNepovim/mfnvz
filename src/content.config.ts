@@ -30,6 +30,7 @@ const seasons = defineCollection({
       )
       .optional(),
     images: z.array(z.string()).optional(),
+    galleryUrl: z.string().url().optional(),
     schedule: z
       .array(z.object({ name: z.string(), startDate: z.date(), location: z.string() }))
       .optional(),

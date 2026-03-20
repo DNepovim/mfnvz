@@ -77,13 +77,16 @@ const { Content } = await render(post)
       <H2>Obrázky</H2>
     </div>
     <Gallery year={post.id} />
-    <div
-      class="relative flex justify-center after:absolute after:top-[52%] after:block after:h-[0.5px] after:w-80 after:bg-gray-700"
-    >
-      <a
-        class="relative z-10 my-8 bg-white px-4 py-4 text-center text-xl transition-colors duration-500 hover:bg-transparent"
-        href={`/rocnik/${post.id}/obrazky`}>Všechny obrázky</a
+    {post.data.galleryUrl && (
+      <div
+        class="relative flex justify-center after:absolute after:top-[52%] after:block after:h-[0.5px] after:w-80 after:bg-gray-700"
       >
-    </div>
+        <a
+          class="relative z-10 my-8 bg-white px-4 py-4 text-center text-xl transition-colors duration-500 hover:bg-transparent"
+          href={post.data.galleryUrl}
+          target="_blank">Všechny obrázky</a
+        >
+      </div>
+    )}
   </section>
 </Layout>
