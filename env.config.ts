@@ -22,7 +22,7 @@ export const envConfig = {
       context: "client",
       access: "public",
     }),
-    CLOUDINARY_API_KEY: envField.string({
+    PUBLIC_CLOUDINARY_API_KEY: envField.string({
       context: "client",
       access: "public",
     }),
