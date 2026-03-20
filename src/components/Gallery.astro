@@ -47,6 +47,8 @@ const images = (await getCollection(`gallery${year as '2024'}`)).toSorted((a, b)
               height={533}
               class="size-full max-h-full max-w-full object-cover"
               flags={['progressive']}
+              crop="auto"
+              gravity="auto"
             />
           </button>
         ))}
