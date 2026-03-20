@@ -23,6 +23,9 @@ const seasons = defineCollection({
           location: z.string().optional(),
           logo: z.string().optional(),
           email: z.string().email().optional(),
+          image: z.string().optional(),
+          claim: z.string().optional(),
+          description: z.string().optional(),
           member: z
             .array(z.object({ name: z.string(), jobTitle: z.string().optional() }))
             .optional(),

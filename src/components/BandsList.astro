@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { CldImage } from 'astro-cloudinary'
+
+import H2 from '@/components/H2.astro'
+
+type Props = {
+  bands: NonNullable<CollectionEntry<'seasons'>['data']['bands']>
+}
+
+const { bands } = Astro.props
+
+const displayBands = bands.filter((b) => b.image || b.description)
+---
+
+{
+  displayBands.length > 0 && (
+    <div class="mx-auto max-w-xl px-4">
+      <H2>Kdo tam hrál?</H2>
+      {displayBands.map((band, index) => (
+        <>
+          {band.image && (
+            <CldImage
+              src={band.image}
+              alt={band.name}
+              class="h-full w-full rounded-lg"
+              sizes="(min-width: 600px) 544px, calc(100vw - 4rem)"
+              width={544}
+              height={350}
+              flags={['progressive']}
+            />
+          )}
+          <h3 class="my-4 text-3xl">
+            {band.url ? <a href={band.url}>{band.name}</a> : band.name}
+          </h3>
+          {band.claim && <p class="mb-2 text-lg italic">{band.claim}</p>}
+          {band.description &&
+            band.description.split('\n\n').map((para) => (
+              <p class="mb-2 text-lg">{para}</p>
+            ))}
+          {index < displayBands.length - 1 && (
+            <hr class="mx-16 mt-12 mb-16 border-gray-300" />
+          )}
+        </>
+      ))}
+    </div>
+  )
+}
