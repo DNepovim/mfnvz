@@ -1,25 +1,22 @@
 ---
 import { getCollection } from 'astro:content'
 import { CldImage } from 'astro-cloudinary'
-import { isDefined, isOneOf } from 'narrowland'
 
 import Lightbox from '@/components/Lightbox.astro'
 
 type Props = {
   year: string
-  isPromotion?: boolean
 }
 
-const { year, isPromotion } = Astro.props
+const { year } = Astro.props
 
 const galleryId = `gallery-${year}`
 
 const isHigher = (index: number, pattern: number[], start = 0): boolean =>
   pattern.includes((index - start) % (pattern[pattern.length - 1] ?? 0))
 
-const images = await getCollection(
-  `gallery${year as '2024'}`,
-  (i) => !isPromotion || isOneOf('promotion', (i.data.tags ?? []).filter(isDefined)),
+const images = (await getCollection(`gallery${year as '2024'}`)).toSorted((a, b) =>
+  a.data.public_id.localeCompare(b.data.public_id),
 )
 ---
 
