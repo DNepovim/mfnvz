@@ -2,6 +2,7 @@
 import { getEntry, render } from 'astro:content'
 
 import A from '@/components/A.astro'
+import Schedule from '@/components/Schedule.astro'
 import BandsLine from '@/components/BandsLine.astro'
 import Claim from '@/components/Claim.astro'
 import Cover from '@/components/Cover.astro'
@@ -41,6 +42,8 @@ const { Content } = await render(post)
   {post.data.bands && <BandsLine bands={post.data.bands} />}
 
   <Claim claim={post.data.claim} />
+
+  {post.data.schedule && <Schedule schedule={post.data.schedule} />}
 
   <div class="mx-auto max-w-xl px-4">
     <Seasons />

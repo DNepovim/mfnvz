@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content'
 
 import A from '@/components/A.astro'
 import BandsList from '@/components/BandsList.astro'
+import Schedule from '@/components/Schedule.astro'
 import BandsLine from '@/components/BandsLine.astro'
 import Claim from '@/components/Claim.astro'
 import Cover from '@/components/Cover.astro'
@@ -73,6 +74,7 @@ const { Content } = await render(post)
       } as Record<string, unknown>}
     />
   </div>
+  {post.data.schedule && <Schedule schedule={post.data.schedule} />}
   {post.data.bands && <BandsList bands={post.data.bands} />}
   <section class="mt-16">
     <div class="mx-auto max-w-xl px-4">
