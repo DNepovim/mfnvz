@@ -171,6 +171,7 @@ const { imagePublicUrls, galleryId } = Astro.props
           e as CustomEvent<{ index: number; galleryId: string }>
         ).detail
         if (id !== galleryId) return
+        if (!window.matchMedia('(min-width: 768px)').matches) return
         open(index)
       })
     })
