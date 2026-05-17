@@ -75,12 +75,22 @@ const buildSubEventSchema = (item: ScheduleItem): Event => ({
   location: item.location,
 })
 
-const buildMusicGroupSchema = (band: Band): MusicGroup => ({
-  '@type': 'MusicGroup',
-  ...band,
-  foundingDate: band.foundingDate?.toISOString(),
-  member: (band.member ?? []).map(buildPersonSchema),
-})
+const getSocialUrl = (field: string | { label: string; url: string } | undefined): string | undefined =>
+  typeof field === 'object' ? field?.url : field
+
+const buildMusicGroupSchema = (band: Band): MusicGroup => {
+  const sameAs = [band.url, band.bandcamp, band.instagram, band.facebook, band.youtube]
+    .map(getSocialUrl)
+    .filter((u): u is string => !!u)
+  const { url, bandcamp, instagram, facebook, youtube, ...rest } = band
+  return {
+    '@type': 'MusicGroup',
+    ...rest,
+    foundingDate: band.foundingDate?.toISOString(),
+    member: (band.member ?? []).map(buildPersonSchema),
+    ...(sameAs.length > 0 && { sameAs }),
+  }
+}
 
 export const buildMusicEventSchema = (
   post: CollectionEntry<'seasons'>,

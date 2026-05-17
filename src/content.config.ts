@@ -17,7 +17,21 @@ const seasons = defineCollection({
       .array(
         z.object({
           name: z.string(),
-          url: z.string().url().optional(),
+          url: z
+            .union([z.string().url(), z.object({ label: z.string(), url: z.string().url() })])
+            .optional(),
+          facebook: z
+            .union([z.string().url(), z.object({ label: z.string(), url: z.string().url() })])
+            .optional(),
+          instagram: z
+            .union([z.string().url(), z.object({ label: z.string(), url: z.string().url() })])
+            .optional(),
+          bandcamp: z
+            .union([z.string().url(), z.object({ label: z.string(), url: z.string().url() })])
+            .optional(),
+          youtube: z
+            .union([z.string().url(), z.object({ label: z.string(), url: z.string().url() })])
+            .optional(),
           genre: z.string().optional(),
           foundingDate: z.date().optional(),
           location: z.string().optional(),

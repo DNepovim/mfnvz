@@ -2,9 +2,8 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content'
 
 import A from '@/components/A.astro'
-import BandsList from '@/components/BandsList.astro'
-import Schedule from '@/components/Schedule.astro'
 import BandsLine from '@/components/BandsLine.astro'
+import BandsList from '@/components/BandsList.astro'
 import Claim from '@/components/Claim.astro'
 import Cover from '@/components/Cover.astro'
 import Gallery from '@/components/Gallery.astro'
@@ -14,6 +13,7 @@ import Hr from '@/components/Hr.astro'
 import Img from '@/components/Img.astro'
 import MusicEventSchema from '@/components/MusicEventSchema.astro'
 import P from '@/components/P.astro'
+import Schedule from '@/components/Schedule.astro'
 import Ul from '@/components/Ul.astro'
 import Layout from '@/layouts/Layout.astro'
 
@@ -81,16 +81,18 @@ const { Content } = await render(post)
       <H2>Obrázky</H2>
     </div>
     <Gallery year={post.id} />
-    {post.data.galleryUrl && (
-      <div
-        class="relative flex justify-center after:absolute after:top-[52%] after:block after:h-[0.5px] after:w-80 after:bg-gray-700"
-      >
-        <a
-          class="relative z-10 my-8 bg-white px-4 py-4 text-center text-xl transition-colors duration-500 hover:bg-transparent"
-          href={post.data.galleryUrl}
-          target="_blank">Všechny obrázky</a
-        >
-      </div>
-    )}
+    {
+      post.data.galleryUrl && (
+        <div class="relative flex justify-center after:absolute after:top-[52%] after:block after:h-[0.5px] after:w-80 after:bg-gray-700">
+          <a
+            class="relative z-10 my-8 bg-white px-4 py-4 text-center text-xl transition-colors duration-500 hover:bg-transparent"
+            href={post.data.galleryUrl}
+            target="_blank"
+          >
+            Všechny obrázky
+          </a>
+        </div>
+      )
+    }
   </section>
 </Layout>

@@ -14,25 +14,27 @@ const { image, title, subtitle, subsubtitle } = Astro.props
 const imageUrl = getCldImageUrl({ src: image, width: 1088, height: 725 })
 ---
 
-<CldImage
-  src={imageUrl}
-  alt=""
-  id="cover-img"
-  class="motion-opacity-in-0 motion-blur-in-xs motion-duration-1400 h-full w-full rounded-lg"
-  sizes="(min-width: 1150px) 1088px, calc(100vw - 4rem)"
-  width={1088}
-  height={725}
-  flags={['progressive']}
-/>
+<div class="h-[80vh] sm:h-auto sm:aspect-1088/725 w-full overflow-hidden rounded-lg">
+  <CldImage
+    src={imageUrl}
+    alt=""
+    id="cover-img"
+    class="motion-opacity-in-0 motion-blur-in-xs motion-duration-1400 h-full w-full object-cover"
+    sizes="(min-width: 1150px) 1088px, calc(100vw - 4rem)"
+    width={1088}
+    height={1450}
+    flags={['progressive']}
+  />
+</div>
 
-<h1 class="font-head relative z-20 -mt-[13vw] pl-4 sm:-mt-32">
+<h1 class="font-head relative z-20 -mt-[18vw] pl-4 sm:-mt-32">
   <span
-    class="motion-opacity-in-0 motion-translate-x-in-[-2rem] motion-duration-700 motion-delay-200 inline-block text-[9vw] text-white transition-colors sm:text-[5rem]"
+    class="motion-opacity-in-0 motion-translate-x-in-[-2rem] motion-duration-700 motion-delay-200 inline-block text-[12vw] text-white transition-colors sm:text-[5rem]"
     >{title}</span
   >
   {
     subtitle && (
-      <span class="motion-opacity-in-0 motion-translate-x-in-[-2rem] motion-duration-700 motion-delay-400 font-head relative mb-4 block overflow-hidden text-[5vw] sm:text-[3rem]">
+      <span class="motion-opacity-in-0 motion-translate-x-in-[-2rem] motion-duration-700 motion-delay-400 font-head relative mb-4 block overflow-hidden text-[7vw] sm:text-[3rem]">
         {subtitle}
       </span>
     )

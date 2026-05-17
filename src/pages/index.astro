@@ -2,8 +2,8 @@
 import { getEntry, render } from 'astro:content'
 
 import A from '@/components/A.astro'
-import Schedule from '@/components/Schedule.astro'
 import BandsLine from '@/components/BandsLine.astro'
+import BandsList from '@/components/BandsList.astro'
 import Claim from '@/components/Claim.astro'
 import Cover from '@/components/Cover.astro'
 import Gallery from '@/components/Gallery.astro'
@@ -13,7 +13,7 @@ import Hr from '@/components/Hr.astro'
 import Img from '@/components/Img.astro'
 import MusicEventSchema from '@/components/MusicEventSchema.astro'
 import P from '@/components/P.astro'
-import Seasons from '@/components/Seasons.astro'
+import Schedule from '@/components/Schedule.astro'
 import Ul from '@/components/Ul.astro'
 import Layout from '@/layouts/Layout.astro'
 
@@ -22,7 +22,6 @@ const post = await getEntry('seasons', '2026')
 if (!post) {
   return
 }
-
 
 const { Content } = await render(post)
 ---
@@ -46,7 +45,6 @@ const { Content } = await render(post)
   {post.data.schedule && <Schedule schedule={post.data.schedule} />}
 
   <div class="mx-auto max-w-xl px-4">
-    <Seasons />
     <Content
       components={{
         h2: H2,
@@ -59,6 +57,7 @@ const { Content } = await render(post)
       } as Record<string, unknown>}
     />
   </div>
+  {post.data.bands && <BandsList title="Kdo tam bude hrát?" bands={post.data.bands} />}
 
   <Gallery year={post.id} />
 </Layout>

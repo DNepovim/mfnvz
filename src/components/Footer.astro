@@ -1,65 +1,58 @@
 ---
-import { getCollection } from "astro:content";
-import { Icon } from "astro-icon/components";
-import FacebookIcon from "@/components/FacebookIcon.astro";
-import SeasonTile from "@/components/SeasonTile.astro";
+import { getCollection } from 'astro:content'
+import { Icon } from 'astro-icon/components'
+
+import FacebookIcon from '@/components/FacebookIcon.astro'
+import H2 from '@/components/H2.astro'
+import SeasonTile from '@/components/SeasonTile.astro'
 
 type Props = {
-  currentSeasonId?: string;
-};
+  currentSeasonId?: string
+}
 
-const { currentSeasonId } = Astro.props;
+const { currentSeasonId } = Astro.props
 
-const seasons = (await getCollection("seasons")).toSorted(
+const seasons = (await getCollection('seasons')).toSorted(
   (a, b) => Number(b.id) - Number(a.id),
-);
-const [currentSeason] = seasons;
-const activeSeasonId = currentSeasonId ?? currentSeason?.id;
+)
+const [currentSeason] = seasons
+const activeSeasonId = currentSeasonId ?? currentSeason?.id
 ---
 
-<footer
-  class="mt-16 border-t border-gray-300 px-4 text-xl flex flex-col gap-32 py-8"
->
-  <div class="flex max-lg:flex-wrap justify-center gap-4">
-    {
-      seasons.map((s) => (
-        <SeasonTile season={s} isActive={activeSeasonId === s.id} />
-      ))
-    }
+<footer class="mt-16 flex flex-col gap-32 border-t border-gray-300 px-4 py-8 text-xl">
+  <div>
+    <h2 class="mt-16 mb-6 flex items-start gap-2 text-2xl sm:relative">
+      Předchozí ročníky
+    </h2>
+    <div class="flex justify-center gap-4 max-lg:flex-wrap">
+      {seasons.map((s) => <SeasonTile season={s} isActive={activeSeasonId === s.id} />)}
+    </div>
   </div>
-  <div class="justify-around flex flex-col gap-4 md:flex-row md:items-center">
+  <div class="flex flex-col justify-around gap-4 md:flex-row md:items-center">
     {
       currentSeason?.data.fbEventLink && (
         <>
           <a
-            class="flex gap-2 items-start"
+            class="flex items-start gap-2"
             href={currentSeason.data.fbEventLink}
             target="_blank"
           >
-            <FacebookIcon class="w-6 h-6 mt-1" />
+            <FacebookIcon class="mt-1 h-6 w-6" />
             <span>sleduj událost na facebooku</span>
           </a>
-          <span class="hidden md:block flex-1 bg-gray-700 h-[0.5px]" />
+          <span class="hidden h-[0.5px] flex-1 bg-gray-700 md:block" />
         </>
       )
     }
 
-    <a
-      class="flex gap-2 items-start"
-      href="mailto:principal@mfnvz.cz"
-      target="_blank"
-    >
-      <Icon name="ph:envelope-simple" class="w-6 h-6 mt-1" />
+    <a class="flex items-start gap-2" href="mailto:principal@mfnvz.cz" target="_blank">
+      <Icon name="ph:envelope-simple" class="mt-1 h-6 w-6" />
       principal@mfnvz.cz
     </a>
-    <span class="hidden md:block flex-1 bg-gray-700 h-[0.5px]"></span>
+    <span class="hidden h-[0.5px] flex-1 bg-gray-700 md:block"></span>
 
-    <a
-      class="flex gap-2 items-start"
-      href="https://mapy.cz/s/cagafosesu"
-      target="_blank"
-    >
-      <Icon name="ph:map-pin" class="w-6 h-6 mt-1" />
+    <a class="flex items-start gap-2" href="https://mapy.cz/s/cagafosesu" target="_blank">
+      <Icon name="ph:map-pin" class="mt-1 h-6 w-6" />
       Žižkova 257 Řevnice
     </a>
   </div>

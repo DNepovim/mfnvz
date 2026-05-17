@@ -1,24 +1,68 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import { CldImage } from 'astro-cloudinary'
+import { Icon } from 'astro-icon/components'
 
+import BandcampIcon from '@/components/BandcampIcon.astro'
 import H2 from '@/components/H2.astro'
+import { slugify } from '@/utils/slug'
 
 type Props = {
+  title?: string
   bands: NonNullable<CollectionEntry<'seasons'>['data']['bands']>
 }
 
-const { bands } = Astro.props
-
+const { title, bands } = Astro.props
+console.log("title", title, typeof title)
 const displayBands = bands.filter((b) => b.image || b.description)
+
+type SocialField = string | { label: string; url: string } | undefined
+
+function getUrl(field: SocialField): string {
+  if (!field) return ''
+  return typeof field === 'string' ? field : field.url
+}
+
+function getLabel(field: SocialField, type: string): string {
+  if (!field) return ''
+  if (typeof field === 'object') return field.label
+  try {
+    const u = new URL(field)
+    if (type === 'url') return u.hostname.replace(/^www\./, '')
+    if (type === 'bandcamp') return u.hostname.replace('.bandcamp.com', '')
+    return u.pathname.replace(/^\//, '').replace(/\/$/, '')
+  } catch {
+    return field
+  }
+}
+
+type SocialLink = { type: string; url: string; label: string; icon: string }
+
+function getSocialLinks(band: (typeof displayBands)[number]): SocialLink[] {
+  const defs = [
+    { type: 'url', field: band.url, icon: 'ph:globe' },
+    { type: 'bandcamp', field: band.bandcamp, icon: 'bandcamp' },
+    { type: 'instagram', field: band.instagram, icon: 'ph:instagram-logo' },
+    { type: 'facebook', field: band.facebook, icon: 'ph:facebook-logo' },
+    { type: 'youtube', field: band.youtube, icon: 'ph:youtube-logo' },
+  ] as const
+  return defs
+    .filter((d) => !!d.field)
+    .map((d) => ({
+      type: d.type,
+      url: getUrl(d.field),
+      label: getLabel(d.field, d.type),
+      icon: d.icon,
+    }))
+}
 ---
 
 {
   displayBands.length > 0 && (
     <div class="mx-auto max-w-xl px-4">
-      <H2>Kdo tam hrál?</H2>
+      <H2>{title ?? 'Kdo tam hrál?'}</H2>
       {displayBands.map((band, index) => (
-        <>
+        <div id={slugify(band.name)} class="scroll-mt-4">
           {band.image && (
             <CldImage
               src={band.image}
@@ -27,21 +71,40 @@ const displayBands = bands.filter((b) => b.image || b.description)
               sizes="(min-width: 600px) 544px, calc(100vw - 4rem)"
               width={544}
               height={350}
+              crop="fill"
+              gravity="auto"
               flags={['progressive']}
             />
           )}
-          <h3 class="my-4 text-3xl">
-            {band.url ? <a href={band.url}>{band.name}</a> : band.name}
-          </h3>
+          <h3 class="my-4 text-3xl">{band.name}</h3>
+          {getSocialLinks(band).length > 0 && (
+            <div class="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-xs">
+              {getSocialLinks(band).map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 transition-colors hover:underline"
+                >
+                  {link.icon === 'bandcamp' ? (
+                    <BandcampIcon class="size-3" />
+                  ) : (
+                    <Icon name={link.icon} class="size-3" />
+                  )}
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
           {band.claim && <p class="mb-2 text-lg italic">{band.claim}</p>}
           {band.description &&
-            band.description.split('\n\n').map((para) => (
-              <p class="mb-2 text-lg">{para}</p>
-            ))}
+            band.description
+              .split('\n\n')
+              .map((para) => <p class="mb-2 text-lg">{para}</p>)}
           {index < displayBands.length - 1 && (
             <hr class="mx-16 mt-12 mb-16 border-gray-300" />
           )}
-        </>
+        </div>
       ))}
     </div>
   )
