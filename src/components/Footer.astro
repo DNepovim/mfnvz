@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content'
 import { Icon } from 'astro-icon/components'
 
 import FacebookIcon from '@/components/FacebookIcon.astro'
-import H2 from '@/components/H2.astro'
 import SeasonTile from '@/components/SeasonTile.astro'
 
 type Props = {
@@ -12,20 +11,29 @@ type Props = {
 
 const { currentSeasonId } = Astro.props
 
-const seasons = (await getCollection('seasons')).toSorted(
+const prevSeasons = (await getCollection('seasons')).toSorted(
   (a, b) => Number(b.id) - Number(a.id),
 )
-const [currentSeason] = seasons
+const [currentSeason] = prevSeasons
 const activeSeasonId = currentSeasonId ?? currentSeason?.id
 ---
 
 <footer class="mt-16 flex flex-col gap-32 border-t border-gray-300 px-4 py-8 text-xl">
   <div>
-    <h2 class="mt-16 mb-6 flex items-start gap-2 text-2xl sm:relative">
-      Předchozí ročníky
-    </h2>
-    <div class="flex justify-center gap-4 max-lg:flex-wrap">
-      {seasons.map((s) => <SeasonTile season={s} isActive={activeSeasonId === s.id} />)}
+    <div class={`grid grid-cols-4 justify-center gap-4 max-lg:flex-wrap`}>
+      {
+        prevSeasons.map((_, index) => (
+          <>
+            {index === 0 && <p class="mb-6text-2xl text-right">aktuální ročník</p>}
+            {index === 1 && <p class="mb-6text-2xl col-span-3">předchozí ročníky</p>}
+          </>
+        ))
+      }
+      {
+        prevSeasons.map((s) => (
+          <SeasonTile season={s} isActive={activeSeasonId === s.id} />
+        ))
+      }
     </div>
   </div>
   <div class="flex flex-col justify-around gap-4 md:flex-row md:items-center">
