@@ -1,35 +1,22 @@
 ---
-import { slugify } from '@/utils/slug'
-
 type Props = {
   bands: { name: string }[]
 }
 
 const { bands } = Astro.props
-
-const mid = Math.ceil(bands.length / 2)
-const rows = [bands.slice(0, mid), bands.slice(mid)].filter((r) => r.length > 0)
 ---
 
-<div class="text-md mt-8 mb-8 px-4 font-thin sm:text-2xl">
-  <div class="hidden sm:flex items-center gap-4">
-    {bands.map(({ name }, i) => (
+<p
+  class="text-lg mt-8 mb-8 flex items-center gap-4 px-4 font-thin max-sm:flex-wrap max-sm:justify-around sm:text-2xl"
+>
+  {
+    bands.map(({ name }, i) => (
       <>
-        <a href={`#${slugify(name)}`} class="whitespace-nowrap hover:underline">{name}</a>
-        {i < bands.length - 1 && <span class="h-[0.5px] flex-1 bg-gray-700" />}
+  <span class="whitespace-nowrap max-sm:block max-sm:w-[40%] text-center">{name}</span>
+        {i < bands.length - 1 && (
+          <span class="h-[0.5px] flex-1 bg-gray-700 max-sm:hidden" />
+        )}
       </>
-    ))}
-  </div>
-  <div class="flex flex-col gap-4 sm:hidden">
-    {rows.map((row) => (
-      <div class="flex items-center gap-4">
-        {row.map(({ name }, i) => (
-          <>
-            <a href={`#${slugify(name)}`} class="whitespace-nowrap hover:underline">{name}</a>
-            {i < row.length - 1 && <span class="h-[0.5px] flex-1 bg-gray-700" />}
-          </>
-        ))}
-      </div>
-    ))}
-  </div>
-</div>
+    ))
+  }
+</p>

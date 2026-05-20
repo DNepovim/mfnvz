@@ -14,7 +14,9 @@ const { image, title, subtitle, subsubtitle } = Astro.props
 const imageUrl = getCldImageUrl({ src: image, width: 1088, height: 725 })
 ---
 
-<div class="h-[70vh] sm:h-auto sm:aspect-1088/725 w-full overflow-hidden rounded-lg">
+<div
+  class="aspect-square w-full overflow-hidden rounded-lg sm:aspect-1088/725 sm:h-auto"
+>
   <CldImage
     src={imageUrl}
     alt=""

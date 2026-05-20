@@ -74,7 +74,6 @@ const { Content } = await render(post)
       } as Record<string, unknown>}
     />
   </div>
-  {post.data.schedule && <Schedule schedule={post.data.schedule} />}
   {post.data.bands && <BandsList bands={post.data.bands} />}
   <section class="mt-16">
     <div class="mx-auto max-w-xl px-4">

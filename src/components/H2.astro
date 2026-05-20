@@ -1,14 +1,19 @@
 ---
 import { Icon } from "astro-icon/components";
+import { slugify } from "@/utils/slug";
 
 type Props = {
   className?: string;
+  id?: string;
 };
 
-const { className } = Astro.props;
+const { className, id } = Astro.props;
+const slotContent = await Astro.slots.render('default');
+const headingId = id ?? slugify(slotContent.replace(/<[^>]*>/g, ''));
 ---
 
 <h2
+  id={headingId}
   class:list={[
     "font-head text-4xl items-start mb-6 mt-16 sm:relative flex gap-2",
     className,
