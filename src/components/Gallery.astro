@@ -16,7 +16,7 @@ const isHigher = (index: number, pattern: number[], start = 0): boolean =>
   pattern.includes((index - start) % (pattern[pattern.length - 1] ?? 0))
 
 const images = (await getCollection(`gallery${year as '2024'}`)).toSorted((a, b) =>
-  a.data.public_id.localeCompare(b.data.public_id),
+  (a.data.display_name ?? '').localeCompare(b.data.display_name ?? ''),
 )
 ---
 
