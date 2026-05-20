@@ -14,16 +14,21 @@ const { schedule } = Astro.props
   <H2>Harmonogram</H2>
   <ul class="mb-10 text-lg">
     {
-      schedule.map((item) => (
-        <li>
-          {item.startDate.toLocaleTimeString('cs-CZ', {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false,
-            timeZone: 'UTC',
-          })}
+      schedule.map((item, index) => (
+        <li class="relative">
+          <span class="font-head inline-block w-16">
+            {item.startDate.toLocaleTimeString('cs-CZ', {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+              timeZone: 'UTC',
+            })}
+          </span>
           {' – '}
-          {item.name}
+          {item.name.toLocaleLowerCase()}
+          {index > 0 && (
+            <span class="absolute top-0 left-8 h-2 w-px translate-y-full bg-black" />
+          )}
         </li>
       ))
     }

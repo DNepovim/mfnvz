@@ -16,7 +16,7 @@ const isFuture = season.data.startDate > today
 
 <a
   class:list={[
-    'group relative block w-full overflow-hidden rounded-lg sm:max-w-64',
+    'group relative block w-64 shrink-0 overflow-hidden rounded-lg snap-start',
     isActive
       ? 'pointer-events-none grayscale'
       : 'transition-[filter] duration-700 hover:grayscale-0',
@@ -35,6 +35,8 @@ const isFuture = season.data.startDate > today
     height={363}
     crop="fill"
     gravity="auto"
+    format="auto"
+    quality="auto"
   />
   <p class="font-head relative -mt-11 ml-2 flex flex-col gap-2">
     <span class="text-3xl text-white">{seasonNumber}. ročník</span>

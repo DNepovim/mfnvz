@@ -18,34 +18,22 @@ const [currentSeason] = prevSeasons
 const activeSeasonId = currentSeasonId ?? currentSeason?.id
 ---
 
-<footer class="mt-16 flex flex-col gap-32 border-t border-gray-300 px-4 py-8 text-xl">
-  <div>
-    <div class={`grid grid-cols-4 justify-center gap-4 max-lg:flex-wrap`}>
-      {
-        prevSeasons.map((_, index) => (
-          <>
-            {index === 0 && <p class="mb-6text-2xl text-right">aktuální ročník</p>}
-            {index === 1 && <p class="mb-6text-2xl col-span-3">předchozí ročníky</p>}
-          </>
-        ))
-      }
-      {
-        prevSeasons.map((s) => (
-          <SeasonTile season={s} isActive={activeSeasonId === s.id} />
-        ))
-      }
-    </div>
+<footer class="mt-16 flex flex-col gap-32 border-t border-gray-300 px-4 pt-8 pb-4 text-xl">
+  <div class="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4">
+    {prevSeasons.map((s) => <SeasonTile season={s} isActive={activeSeasonId === s.id} />)}
   </div>
-  <div class="flex flex-col justify-around gap-4 md:flex-row md:items-center">
+  <div
+    class="flex flex-col items-center justify-around gap-4 md:flex-row md:items-center"
+  >
     {
       currentSeason?.data.fbEventLink && (
         <>
           <a
-            class="flex items-start gap-2"
+            class="flex items-start gap-2 hover:underline"
             href={currentSeason.data.fbEventLink}
             target="_blank"
           >
-            <FacebookIcon class="mt-1 h-6 w-6" />
+            <Icon name="ph:facebook-logo" class="mt-1 h-6 w-6" />
             <span>sleduj událost na facebooku</span>
           </a>
           <span class="hidden h-[0.5px] flex-1 bg-gray-700 md:block" />
@@ -53,15 +41,31 @@ const activeSeasonId = currentSeasonId ?? currentSeason?.id
       )
     }
 
-    <a class="flex items-start gap-2" href="mailto:principal@mfnvz.cz" target="_blank">
+    <a
+      class="flex items-start gap-2 hover:underline"
+      href="mailto:principal@mfnvz.cz"
+      target="_blank"
+    >
       <Icon name="ph:envelope-simple" class="mt-1 h-6 w-6" />
       principal@mfnvz.cz
     </a>
     <span class="hidden h-[0.5px] flex-1 bg-gray-700 md:block"></span>
 
-    <a class="flex items-start gap-2" href="https://mapy.cz/s/cagafosesu" target="_blank">
+    <a
+      class="flex items-start gap-2 hover:underline"
+      href="https://mapy.cz/s/cagafosesu"
+      target="_blank"
+    >
       <Icon name="ph:map-pin" class="mt-1 h-6 w-6" />
-      Žižkova 257 Řevnice
+      Žižkova 257, Řevnice
     </a>
+  </div>
+  <div class="text-center text-sm text-gray-600">
+    web uspořádal principál <a
+      class="font-head text-lg hover:underline"
+      href="https://www.dominikblaha.cz"
+      target="_blank"
+      rel="noopener noreferrer">Dominik Bláha</a
+    >
   </div>
 </footer>

@@ -1,4 +1,6 @@
 ---
+import { slugify } from '@/utils/slug'
+
 type Props = {
   bands: { name: string }[]
 }
@@ -12,7 +14,7 @@ const { bands } = Astro.props
   {
     bands.map(({ name }, i) => (
       <>
-  <span class="whitespace-nowrap max-sm:block max-sm:w-[40%] text-center">{name}</span>
+  <a href={`#${slugify(name)}`} class="whitespace-nowrap max-sm:block max-sm:w-[40%] text-center hover:underline">{name}</a>
         {i < bands.length - 1 && (
           <span class="h-[0.5px] flex-1 bg-gray-700 max-sm:hidden" />
         )}
