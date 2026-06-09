@@ -40,7 +40,7 @@ const { Content } = await render(post)
 
 <Layout
   title={`${String(seasonNumber)}. ročník ${post.id}`}
-  description={post.data.claim}
+  description={`${post.data.startDate.toLocaleDateString('cs-CZ')} – ${post.data.claim}`}
   image={`/og/${post.id}.jpg`}
   currentSeasonId={post.id}
 >
