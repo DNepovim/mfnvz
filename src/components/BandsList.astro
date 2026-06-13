@@ -1,9 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import { CldImage } from 'astro-cloudinary'
 import { Icon } from 'astro-icon/components'
 
 import BandcampIcon from '@/components/BandcampIcon.astro'
+import BandCarousel from '@/components/BandCarousel.astro'
 import H2 from '@/components/H2.astro'
 import { renderMarkdown } from '@/utils/markdown'
 import { slugify } from '@/utils/slug'
@@ -15,7 +15,7 @@ type Props = {
 
 const { title, bands } = Astro.props
 const displayBands = bands
-  .filter((b) => b.image || b.description)
+  .filter((b) => b.images?.length || b.description)
   .map((band) => ({
     ...band,
     claimHtml: band.claim ? renderMarkdown(band.claim) : '',
@@ -69,20 +69,8 @@ function getSocialLinks(band: (typeof displayBands)[number]): SocialLink[] {
       <H2>{title ?? 'Kdo tam hrál?'}</H2>
       {displayBands.map((band, index) => (
         <div id={slugify(band.name)} class="scroll-mt-4">
-          {band.image && (
-            <CldImage
-              src={band.image}
-              alt={band.name}
-              class="h-full w-full rounded-lg"
-              sizes="(min-width: 600px) 544px, calc(100vw - 4rem)"
-              width={544}
-              height={350}
-              crop="fill"
-              gravity="auto"
-              format="auto"
-              quality="auto"
-              flags={['progressive']}
-            />
+          {band.images && band.images.length > 0 && (
+            <BandCarousel images={band.images} bandName={band.name} />
           )}
           <h3 class="my-4 text-3xl">{band.name}</h3>
           {getSocialLinks(band).length > 0 && (

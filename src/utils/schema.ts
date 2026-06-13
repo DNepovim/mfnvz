@@ -82,10 +82,11 @@ const buildMusicGroupSchema = (band: Band): MusicGroup => {
   const sameAs = [band.url, band.bandcamp, band.instagram, band.facebook, band.youtube]
     .map(getSocialUrl)
     .filter((u): u is string => !!u)
-  const { url, bandcamp, instagram, facebook, youtube, ...rest } = band
+  const { url, bandcamp, instagram, facebook, youtube, images, ...rest } = band
   return {
     '@type': 'MusicGroup',
     ...rest,
+    ...(images?.length && { image: images }),
     foundingDate: band.foundingDate?.toISOString(),
     member: (band.member ?? []).map(buildPersonSchema),
     ...(sameAs.length > 0 && { sameAs }),

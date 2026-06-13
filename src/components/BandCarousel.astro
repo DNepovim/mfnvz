@@ -1,0 +1,74 @@
+---
+import { CldImage } from 'astro-cloudinary'
+
+type Props = {
+  images: string[]
+  bandName: string
+}
+
+const { images, bandName } = Astro.props
+---
+
+<div data-band-carousel>
+  <div class="overflow-hidden" data-carousel-viewport>
+    <div class="flex gap-3" data-carousel-container>
+      {images.map((src, i) => (
+        <div class="w-[calc(100vw-2rem)] shrink-0 sm:w-[544px]">
+          <CldImage
+            src={src}
+            alt={i === 0 ? bandName : `${bandName} ${i + 1}`}
+            class="h-full w-full cursor-pointer rounded-lg"
+            sizes="(min-width: 600px) 544px, calc(100vw - 4rem)"
+            width={544}
+            height={350}
+            crop="fill"
+            gravity="auto"
+            format="auto"
+            quality="auto"
+            flags={['progressive']}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            data-slide-index={i}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  import EmblaCarousel from 'embla-carousel'
+
+  function initCarousels() {
+    document.querySelectorAll<HTMLElement>('[data-band-carousel]').forEach((root) => {
+      if (root.dataset.initialized) return
+      const viewport = root.querySelector<HTMLElement>('[data-carousel-viewport]')
+      const container = viewport?.querySelector<HTMLElement>('[data-carousel-container]')
+      if (!viewport || !container || container.children.length <= 1) return
+
+      function setViewportWidth() {
+        const left = viewport!.getBoundingClientRect().left
+        viewport!.style.marginLeft = `-${left}px`
+        viewport!.style.paddingLeft = `${left}px`
+        viewport!.style.width = `${window.innerWidth}px`
+      }
+      setViewportWidth()
+      window.addEventListener('resize', setViewportWidth, { passive: true })
+
+      const embla = EmblaCarousel(viewport, {
+        align: 'start',
+        containScroll: false,
+      })
+
+      embla.slideNodes().forEach((slide, index) => {
+        slide.addEventListener('click', () => {
+          embla.scrollTo(index)
+        })
+      })
+
+      root.dataset.initialized = 'true'
+    })
+  }
+
+  initCarousels()
+  document.addEventListener('astro:page-load', initCarousels)
+</script>
