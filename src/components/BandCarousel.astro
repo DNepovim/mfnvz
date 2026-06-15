@@ -10,7 +10,7 @@ const { images, bandName } = Astro.props
 ---
 
 <div data-band-carousel>
-  <div class="overflow-hidden" data-carousel-viewport>
+  <div class="touch-pan-y overflow-hidden" data-carousel-viewport>
     <div class="flex gap-3" data-carousel-container>
       {images.map((src, i) => (
         <div class="w-[calc(100vw-2rem)] shrink-0 sm:w-[544px]">

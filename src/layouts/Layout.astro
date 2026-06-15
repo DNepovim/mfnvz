@@ -29,7 +29,7 @@ const config = {
 <html lang="cs" class="font-text">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href={favicon.src} />
     <meta name="generator" content={Astro.generator} />
     <MetaTags title={pageTitle} description={description} image={image} url={Astro.url.href} />
@@ -38,7 +38,7 @@ const config = {
     ></script>
     <slot name="head" />
   </head>
-  <body>
+  <body class="overflow-x-hidden">
     <Analytics />
     <main id="swup" class="max-w-6xl mx-auto pt-2 sm:pt-4 px-1 sm:px-8">
       <slot />
