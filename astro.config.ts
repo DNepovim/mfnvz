@@ -22,7 +22,7 @@ export default defineConfig({
     mdx(),
     sitemap({
       lastmod: new Date(),
-      filter: (page) => !page.includes('/obrazky'),
+      filter: (page) => !page.includes('/raw'),
     }),
     icon(),
     swup({

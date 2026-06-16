@@ -1,5 +1,5 @@
 ---
-import { getEntry, render } from 'astro:content'
+import { getEntry } from 'astro:content'
 
 import A from '@/components/A.astro'
 import BandsLine from '@/components/BandsLine.astro'
@@ -23,7 +23,7 @@ if (!post) {
   return
 }
 
-const { Content } = await render(post)
+import { Content } from '@/content/index.mdx'
 ---
 
 <Layout

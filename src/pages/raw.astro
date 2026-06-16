@@ -1,0 +1,115 @@
+---
+import { readFileSync } from 'fs'
+import { join } from 'path'
+import { getEntry } from 'astro:content'
+
+const post = await getEntry('seasons', '2026')
+
+if (!post) {
+  return new Response(null, { status: 404 })
+}
+
+const { schedule, bands, claim } = post.data
+const seasonNumber = Number(post.id) - 2022
+
+const plainClaim = claim?.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') ?? ''
+
+const formatTime = (d: Date) =>
+  d.toLocaleTimeString('cs-CZ', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'UTC',
+  })
+
+const rawMdx = readFileSync(join(process.cwd(), 'src/content/index.mdx'), 'utf-8')
+
+const faqText = rawMdx
+  .replace(/^## (.+)$/gm, '\n== $1 ==')
+  .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+  .replace(/…/g, '...')
+  .replace(/\n{3,}/g, '\n\n')
+  .trim()
+---
+
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Raw</title>
+    <style>
+      body {
+        font-family: monospace;
+        max-width: 700px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        line-height: 1.6;
+        background: #111;
+        color: #eee;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        background: #222;
+        padding: 1.5rem;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 1.8;
+        cursor: text;
+        user-select: all;
+      }
+      button {
+        background: #333;
+        color: #eee;
+        border: 1px solid #555;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        margin-bottom: 1rem;
+      }
+      button:hover {
+        background: #444;
+      }
+      .copied {
+        color: #4f4;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="copy-btn">Kopírovat</button>
+    <pre
+      id="content">{
+`${plainClaim}
+
+== Harmonogram ==
+${schedule?.map((item) => `${formatTime(item.startDate)}  ${item.name}`).join('\n') ?? ''}
+
+${faqText}
+
+== A kdo tam tedy bude hrát? ==
+${bands?.map((band) => {
+  const lines = [band.name.toUpperCase()]
+  if (band.claim) lines.push(band.claim)
+  if (band.description) lines.push(band.description)
+  return lines.join('\n')
+}).join('\n\n') ?? ''}
+
+Pokud jste dočetli až sem a chcete si to přečíst ještě jednou, tak koukněte na náš web www.mfnvz.cz. Je tam to samé, ale s obrázky.`
+    }</pre>
+
+    <script is:inline>
+      document.getElementById('copy-btn').addEventListener('click', function () {
+        const text = document.getElementById('content').textContent
+        navigator.clipboard.writeText(text).then(() => {
+          this.textContent = 'Skopírováno!'
+          this.classList.add('copied')
+          setTimeout(() => {
+            this.textContent = 'Kopírovat'
+            this.classList.remove('copied')
+          }, 2000)
+        })
+      })
+    </script>
+  </body>
+</html>
