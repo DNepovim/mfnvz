@@ -5,26 +5,34 @@ import { CldImage } from 'astro-cloudinary'
 import Lightbox from '@/components/Lightbox.astro'
 
 type Props = {
-  year: string
+  year?: string
+  id?: string
+  images?: string[]
 }
 
-const { year } = Astro.props
+const { year, id, images: imageUrls } = Astro.props
 
-const galleryId = `gallery-${year}`
+const galleryId = `gallery-${id ?? year ?? 'vse'}`
 
 const isHigher = (index: number, pattern: number[], start = 0): boolean =>
   pattern.includes((index - start) % (pattern[pattern.length - 1] ?? 0))
 
-const images = (await getCollection(`gallery${year as '2024'}`)).toSorted((a, b) =>
-  (a.data.display_name ?? '').localeCompare(b.data.display_name ?? ''),
-)
+const images =
+  imageUrls ??
+  (year
+    ? (await getCollection(`gallery${year as '2024'}`))
+        .toSorted((a, b) =>
+          (a.data.display_name ?? '').localeCompare(b.data.display_name ?? ''),
+        )
+        .map(({ data }) => data.url)
+    : [])
 ---
 
 {
   (
     <>
       <div class="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3" id={galleryId}>
-        {images.map(({ data }, index) => (
+        {images.map((url, index) => (
           <button
             type="button"
             class:list={[
@@ -41,7 +49,7 @@ const images = (await getCollection(`gallery${year as '2024'}`)).toSorted((a, b)
             aria-label={`Open image ${String(index + 1)} in lightbox`}
           >
             <CldImage
-              src={data.url}
+              src={url}
               alt=""
               width={800}
               height={533}
@@ -55,7 +63,7 @@ const images = (await getCollection(`gallery${year as '2024'}`)).toSorted((a, b)
           </button>
         ))}
       </div>
-      <Lightbox imagePublicUrls={images.map(({ data }) => data.url)} {galleryId} />
+      <Lightbox imagePublicUrls={images} {galleryId} />
     </>
   )
 }

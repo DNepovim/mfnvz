@@ -1,0 +1,48 @@
+---
+import { getEntry } from 'astro:content'
+
+import A from '@/components/A.astro'
+import H2 from '@/components/H2.astro'
+import H3 from '@/components/H3.astro'
+import Hr from '@/components/Hr.astro'
+import Img from '@/components/Img.astro'
+import P from '@/components/P.astro'
+import Ul from '@/components/Ul.astro'
+import { Content } from '@/content/index.mdx'
+import Layout from '@/layouts/Layout.astro'
+
+const post = await getEntry('seasons', '2027')
+
+if (!post) {
+  return new Response(null, { status: 404 })
+}
+---
+
+<Layout
+  title="Informace"
+  description="Vše, co potřebujete vědět o Malém festivalu na velké zahradě."
+  currentSeasonId={post.id}
+>
+  <header class="relative ml-4 flex justify-between">
+    <a href="/" class="relative z-10 flex flex-col gap-1 sm:gap-4">
+      <span class="font-head text-[7vw] sm:text-5xl">Malý festival</span>
+      <span class="font-head text-[4vw] sm:text-3xl">na velké zahradě</span>
+    </a>
+    <menu><li></li></menu>
+  </header>
+
+  <div class="mx-auto max-w-xl px-4">
+    <h1 class="font-head mt-12 text-5xl">Informace</h1>
+    <Content
+      components={{
+        h2: H2,
+        h3: H3,
+        p: P,
+        a: A,
+        ul: Ul,
+        img: Img,
+        hr: Hr,
+      } as Record<string, unknown>}
+    />
+  </div>
+</Layout>

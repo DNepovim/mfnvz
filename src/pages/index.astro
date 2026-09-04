@@ -1,20 +1,14 @@
 ---
-import { getEntry } from 'astro:content'
+import { getCollection, getEntry } from 'astro:content'
+import { isNonEmptyArray } from 'narrowland'
 
-import A from '@/components/A.astro'
 import BandsLine from '@/components/BandsLine.astro'
-import BandsList from '@/components/BandsList.astro'
 import Claim from '@/components/Claim.astro'
 import Cover from '@/components/Cover.astro'
 import Gallery from '@/components/Gallery.astro'
 import H2 from '@/components/H2.astro'
-import H3 from '@/components/H3.astro'
-import Hr from '@/components/Hr.astro'
-import Img from '@/components/Img.astro'
 import MusicEventSchema from '@/components/MusicEventSchema.astro'
-import P from '@/components/P.astro'
-import Schedule from '@/components/Schedule.astro'
-import Ul from '@/components/Ul.astro'
+import SeasonTile from '@/components/SeasonTile.astro'
 import Layout from '@/layouts/Layout.astro'
 
 const post = await getEntry('seasons', '2027')
@@ -23,7 +17,17 @@ if (!post) {
   return
 }
 
-import { Content } from '@/content/index.mdx'
+const seasons = await getCollection('seasons')
+
+const now = new Date()
+const pastSeasons = seasons
+  .filter((season) => season.data.startDate <= now)
+  .toSorted((a, b) => Number(b.id) - Number(a.id))
+console.log('pastSeasons', pastSeasons)
+
+const galleryImages = [
+  ...new Set(pastSeasons.flatMap((season) => season.data.images ?? [])),
+]
 ---
 
 <Layout
@@ -42,22 +46,13 @@ import { Content } from '@/content/index.mdx'
 
   <Claim claim={post.data.claim} />
 
-  {post.data.schedule && <Schedule schedule={post.data.schedule} />}
+  {isNonEmptyArray(galleryImages) && <Gallery id="vse" images={galleryImages} />}
 
-  <div class="mx-auto max-w-xl px-4">
-    <Content
-      components={{
-        h2: H2,
-        h3: H3,
-        p: P,
-        a: A,
-        ul: Ul,
-        img: Img,
-        hr: Hr,
-      } as Record<string, unknown>}
-    />
+  <div class="mx-auto my-12 max-w-xl px-4 text-center">
+    <a
+      href="/informace"
+      class="hover inline-block border-y border-x-transparent p-2 text-2xl hover:border-y-transparent"
+      >Jak to u nás chodí</a
+    >
   </div>
-  {post.data.bands && <BandsList title="Kdo tam bude hrát?" bands={post.data.bands} />}
-
-  <Gallery year={post.id} />
 </Layout>
