@@ -6,9 +6,7 @@ import BandsLine from '@/components/BandsLine.astro'
 import Claim from '@/components/Claim.astro'
 import Cover from '@/components/Cover.astro'
 import Gallery from '@/components/Gallery.astro'
-import H2 from '@/components/H2.astro'
 import MusicEventSchema from '@/components/MusicEventSchema.astro'
-import SeasonTile from '@/components/SeasonTile.astro'
 import Layout from '@/layouts/Layout.astro'
 
 const post = await getEntry('seasons', '2027')
@@ -23,7 +21,6 @@ const now = new Date()
 const pastSeasons = seasons
   .filter((season) => season.data.startDate <= now)
   .toSorted((a, b) => Number(b.id) - Number(a.id))
-console.log('pastSeasons', pastSeasons)
 
 const galleryImages = [
   ...new Set(pastSeasons.flatMap((season) => season.data.images ?? [])),
